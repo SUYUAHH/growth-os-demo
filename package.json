@@ -1,0 +1,28 @@
+{
+  "name": "growth-os",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vite",
+    "server": "node server/index.js",
+    "dev:full": "concurrently -k -n api,web -c blue,green \"pnpm server\" \"vite --host 127.0.0.1 --port 4173\"",
+    "start": "node server/index.js",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "concurrently": "latest",
+    "lucide-react": "latest",
+    "vite": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {}
+}
