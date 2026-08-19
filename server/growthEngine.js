@@ -32,7 +32,7 @@ export function filterTrendsByCategory(trends = [], category = 'all') {
 const defaultStrategies = [
   {
     id: 'tuesday-night-test',
-    benchmark: 'Everyday Motion',
+    benchmark: 'One Pan Table',
     category: 'food', categoryLabel: '美食餐饮', categoryKey: 'FOOD',
     title: '周二晚上测试：简单的晚餐，才是真实的生活',
     mechanism: '高频工作日场景 + 困扰到轻松的情绪转折',
@@ -101,13 +101,13 @@ function categoryFields(category) {
 export function normalizeGrowthState(state) {
   const accounts = (state.accounts || []).map(normalizedAccount)
   const rawTrends = state.trends || []
-  const legacyTrends = rawTrends.some((trend) => /car|commute|luxury|vehicle/i.test(`${trend.title} ${trend.sourcePost || ''}`))
+  const legacyTrends = rawTrends.some((trend) => /car|commute|luxury|vehicle|汽车|通勤|豪华|新能源/i.test(`${trend.title} ${trend.sourcePost || ''}`))
   const trends = (legacyTrends ? seedTrends : rawTrends).map((trend, index) => withCategory(trend, index))
   const rawCandidates = state.candidatePool || []
-  const legacyCandidates = rawCandidates.some((candidate) => /car|commute|luxury|vehicle/i.test(`${candidate.title} ${candidate.source || ''}`))
+  const legacyCandidates = rawCandidates.some((candidate) => /car|commute|luxury|vehicle|汽车|通勤|豪华|新能源/i.test(`${candidate.title} ${candidate.source || ''}`))
   const candidatePool = (legacyCandidates ? [] : rawCandidates).map((candidate, index) => withCategory(candidate, index))
   const rawStrategies = state.benchmarkStrategies || []
-  const legacyStrategies = rawStrategies.some((strategy) => /car|commute|luxury|vehicle|drive with maya|everyday motion/i.test(`${strategy.title} ${strategy.benchmark}`))
+  const legacyStrategies = rawStrategies.some((strategy) => /car|commute|luxury|vehicle|drive with maya|everyday motion|汽车|通勤|豪华|新能源/i.test(`${strategy.title} ${strategy.benchmark}`))
   return {
     ...state,
     accounts,

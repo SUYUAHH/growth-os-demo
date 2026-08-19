@@ -88,8 +88,8 @@ test('normalizes the three interest categories and filters matching hotspots', (
 test('migrates legacy automotive strategies and candidates to the current taxonomy', () => {
   const state = normalizeGrowthState({
     accounts: [],
-    benchmarkStrategies: [{ id: 'old', benchmark: 'Drive with Maya', title: 'Quiet luxury for your first car' }],
-    candidatePool: [{ id: 'old-candidate', title: 'Tiny car upgrades people save', source: 'Local signal stream' }],
+    benchmarkStrategies: [{ id: 'old', benchmark: 'Drive with Maya', title: '下班后的车，才是真实的车' }],
+    candidatePool: [{ id: 'old-candidate', title: '大家真的会收藏的小升级', source: 'Local signal stream · 通勤' }],
   })
   assert.equal(state.benchmarkStrategies.some((item) => /car|luxury|drive/i.test(`${item.title} ${item.benchmark}`)), false)
   assert.equal(state.candidatePool.some((item) => /car|luxury|vehicle/i.test(`${item.title} ${item.source}`)), false)
