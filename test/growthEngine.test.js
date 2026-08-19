@@ -6,8 +6,10 @@ import {
   createCandidateFromStrategy,
   createLeaderTask,
   generateDailyReport,
+  filterTrendsByCategory,
   normalizeGrowthState,
 } from '../server/growthEngine.js'
+import { getSelectedVisibleTrend } from '../src/lib/trendSelection.js'
 
 const baseState = {
   accounts: [{ id: 'account-1', name: 'North Star', health: 68, issue: 'Hook retention is low', action: 'Test a personal opener.' }],
@@ -63,4 +65,40 @@ test('builds an account portfolio with aggregate metrics and connection states',
   assert.ok(portfolio.totals.likeRate > 0)
   assert.equal(portfolio.connections['已连接'] + portfolio.connections['待授权'] + portfolio.connections['数据异常'] + portfolio.connections['Token 即将过期'], 3)
   assert.equal(portfolio.health.risk, 1)
+})
+
+test('normalizes the three interest categories and filters matching hotspots', () => {
+  const state = normalizeGrowthState({
+    accounts: [
+      { id: 'lifestyle-account', name: 'Lifestyle', health: 80 },
+      { id: 'food-account', name: 'Food', health: 80 },
+      { id: 'travel-account', name: 'Travel', health: 80 },
+    ],
+    trends: [
+      { id: 'life-trend', title: 'Life', category: 'lifestyle' },
+      { id: 'food-trend', title: 'Food', category: 'food' },
+      { id: 'travel-trend', title: 'Travel', category: 'travel' },
+    ],
+  })
+  assert.deepEqual(state.accounts.map((item) => item.category), ['lifestyle', 'food', 'travel'])
+  assert.deepEqual(state.accounts.map((item) => item.categoryLabel), ['生活方式', '美食餐饮', '旅行户外'])
+  assert.deepEqual(filterTrendsByCategory(state.trends, 'food').map((item) => item.id), ['food-trend'])
+})
+
+test('migrates legacy automotive strategies and candidates to the current taxonomy', () => {
+  const state = normalizeGrowthState({
+    accounts: [],
+    benchmarkStrategies: [{ id: 'old', benchmark: 'Drive with Maya', title: 'Quiet luxury for your first car' }],
+    candidatePool: [{ id: 'old-candidate', title: 'Tiny car upgrades people save', source: 'Local signal stream' }],
+  })
+  assert.equal(state.benchmarkStrategies.some((item) => /car|luxury|drive/i.test(`${item.title} ${item.benchmark}`)), false)
+  assert.equal(state.candidatePool.some((item) => /car|luxury|vehicle/i.test(`${item.title} ${item.source}`)), false)
+  assert.ok(state.benchmarkStrategies.every((item) => ['food', 'travel'].includes(item.category)))
+})
+
+test('keeps the hotspot detail inside the active category filter', () => {
+  const visible = [{ id: 'food-trend' }, { id: 'food-trend-2' }]
+  assert.equal(getSelectedVisibleTrend(visible, { id: 'travel-trend' }).id, 'food-trend')
+  assert.equal(getSelectedVisibleTrend(visible, { id: 'food-trend-2' }).id, 'food-trend-2')
+  assert.equal(getSelectedVisibleTrend([], { id: 'travel-trend' }).id, 'travel-trend')
 })

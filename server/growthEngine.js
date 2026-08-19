@@ -1,24 +1,55 @@
+import { managedAccounts, trends as seedTrends } from '../src/data/mockData.js'
+
 const priorityWeight = { P0: 0, P1: 1, P2: 2 }
+
+export const contentCategories = [
+  { key: 'lifestyle', label: '生活方式', english: 'Lifestyle' },
+  { key: 'food', label: '美食餐饮', english: 'Food & Dining' },
+  { key: 'travel', label: '旅行户外', english: 'Travel & Outdoors' },
+]
+
+const categoryByKey = new Map(contentCategories.map((item) => [item.key, item]))
+const categoryAliases = new Map([
+  ['生活方式', 'lifestyle'], ['Lifestyle', 'lifestyle'],
+  ['美食餐饮', 'food'], ['Food & Dining', 'food'], ['Food', 'food'],
+  ['旅行户外', 'travel'], ['Travel & Outdoors', 'travel'], ['Travel', 'travel'],
+])
+
+export function normalizeCategory(value, index = 0) {
+  const key = categoryByKey.has(value) ? value : categoryAliases.get(value)
+  return categoryByKey.get(key || contentCategories[index % contentCategories.length].key)
+}
+
+function withCategory(item, index = 0) {
+  const category = normalizeCategory(item.category, index)
+  return { ...item, category: category.key, categoryLabel: category.label, categoryKey: category.key.toUpperCase() }
+}
+
+export function filterTrendsByCategory(trends = [], category = 'all') {
+  return category === 'all' ? trends : trends.filter((trend) => trend.category === normalizeCategory(category).key)
+}
 
 const defaultStrategies = [
   {
     id: 'tuesday-night-test',
     benchmark: 'Everyday Motion',
-    title: '周二晚上测试：下班后的车，才是真实的车',
+    category: 'food', categoryLabel: '美食餐饮', categoryKey: 'FOOD',
+    title: '周二晚上测试：简单的晚餐，才是真实的生活',
     mechanism: '高频工作日场景 + 困扰到轻松的情绪转折',
-    reusable: '先呈现用户在压力场景下的判断，再用一个功能细节兑现它。',
-    avoid: '不复制对标账号的固定人设、原句和“quiet luxury”标签。',
+    reusable: '先呈现用户在压力场景下的判断，再用一个具体步骤兑现它。',
+    avoid: '不复制对标账号的固定人设、原句和“perfect routine”标签。',
     expressionSimilarity: 18,
     mechanismSimilarity: 42,
     risk: '低',
     status: '可进入候选池',
   },
   {
-    id: 'calm-luxury-copy',
-    benchmark: 'Drive with Maya',
-    title: '安静就是新的豪华',
-    mechanism: '情绪化豪华叙事',
-    reusable: '把抽象感受落到日常细节。',
+    id: 'weekend-reset-story',
+    benchmark: 'Weekend Outside',
+    category: 'travel', categoryLabel: '旅行户外', categoryKey: 'TRAVEL',
+    title: '周末就是新的重启键',
+    mechanism: '情绪化户外叙事',
+    reusable: '把抽象感受落到一条可执行的路线和一个具体停留点。',
     avoid: '该表达与对标账号的人设和高频措辞高度重合。',
     expressionSimilarity: 48,
     mechanismSimilarity: 68,
@@ -55,20 +86,37 @@ function issueFor(account, index = 0) {
 }
 
 function normalizedAccount(account, index) {
-  const issues = Array.isArray(account.issues) && account.issues.length ? account.issues.slice(0, 3) : [issueFor(account)]
-  return { ...account, issues, metrics: account.metrics || demoAccountMetrics[index % demoAccountMetrics.length] }
+  const seed = managedAccounts.find((item) => item.id === account.id)
+  const legacy = !account.category || /Auto|EV|Drive/i.test(account.name || '')
+  const source = seed && legacy ? { ...account, ...seed } : account
+  const issues = Array.isArray(source.issues) && source.issues.length ? source.issues.slice(0, 3) : [issueFor(source)]
+  const category = normalizeCategory(source.category, index)
+  return { ...source, ...categoryFields(category), issues, metrics: account.metrics || source.metrics || demoAccountMetrics[index % demoAccountMetrics.length] }
+}
+
+function categoryFields(category) {
+  return { category: category.key, categoryLabel: category.label, categoryKey: category.key.toUpperCase() }
 }
 
 export function normalizeGrowthState(state) {
   const accounts = (state.accounts || []).map(normalizedAccount)
+  const rawTrends = state.trends || []
+  const legacyTrends = rawTrends.some((trend) => /car|commute|luxury|vehicle/i.test(`${trend.title} ${trend.sourcePost || ''}`))
+  const trends = (legacyTrends ? seedTrends : rawTrends).map((trend, index) => withCategory(trend, index))
+  const rawCandidates = state.candidatePool || []
+  const legacyCandidates = rawCandidates.some((candidate) => /car|commute|luxury|vehicle/i.test(`${candidate.title} ${candidate.source || ''}`))
+  const candidatePool = (legacyCandidates ? [] : rawCandidates).map((candidate, index) => withCategory(candidate, index))
+  const rawStrategies = state.benchmarkStrategies || []
+  const legacyStrategies = rawStrategies.some((strategy) => /car|commute|luxury|vehicle|drive with maya|everyday motion/i.test(`${strategy.title} ${strategy.benchmark}`))
   return {
     ...state,
     accounts,
-    candidatePool: state.candidatePool || [],
+    trends,
+    candidatePool,
     activity: state.activity || [],
     leaderTasks: state.leaderTasks || [],
     dailyReports: state.dailyReports || [],
-    benchmarkStrategies: state.benchmarkStrategies?.length ? state.benchmarkStrategies : defaultStrategies,
+    benchmarkStrategies: rawStrategies.length && !legacyStrategies ? rawStrategies : defaultStrategies,
   }
 }
 
@@ -150,6 +198,9 @@ export function createCandidateFromStrategy(state, strategyId) {
     strategyId: strategy.id,
     title: strategy.title,
     source: `对标策略 · ${strategy.benchmark}`,
+    category: strategy.category,
+    categoryLabel: strategy.categoryLabel,
+    categoryKey: strategy.categoryKey,
     status: '待分析',
     addedAt: now(),
     mechanismSimilarity: strategy.mechanismSimilarity,

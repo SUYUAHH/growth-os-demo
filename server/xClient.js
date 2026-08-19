@@ -8,7 +8,7 @@ export function xStatus() {
   return {
     configured: isXConfigured(),
     endpoint: X_RECENT_SEARCH,
-    query: process.env.X_SEARCH_QUERY || '("quiet luxury" OR "first car") lang:en -is:retweet',
+    query: process.env.X_SEARCH_QUERY || '("easy dinner" OR "weekend trail" OR "daily ritual") lang:en -is:retweet',
     message: isXConfigured() ? 'X API v2 已配置，可执行真实监测。' : '未配置 X_BEARER_TOKEN，当前使用本地事件流。',
   }
 }
@@ -20,7 +20,7 @@ export async function fetchRecentTweets(query = process.env.X_SEARCH_QUERY) {
     throw error
   }
 
-  const searchQuery = query || '("quiet luxury" OR "first car") lang:en -is:retweet'
+  const searchQuery = query || '("easy dinner" OR "weekend trail" OR "daily ritual") lang:en -is:retweet'
   const params = new URLSearchParams({
     query: searchQuery,
     max_results: '10',

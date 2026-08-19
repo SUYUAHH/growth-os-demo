@@ -9,9 +9,9 @@ function formatTime() {
 
 function demoObservation() {
   const candidates = [
-    { title: 'The quiet commute test is picking up', chineseTitle: '安静通勤测试正在升温', source: 'Local signal stream', category: 'Lifestyle', momentum: 79, relevance: 84, views: '1.2M' },
-    { title: 'First car, first real adult decision', chineseTitle: '第一台车，也是第一次成年人的选择', source: 'Local signal stream', category: 'Decision', momentum: 83, relevance: 91, views: '920K' },
-    { title: 'Tiny car upgrades people actually save', chineseTitle: '大家真的会收藏的小升级', source: 'Local signal stream', category: 'Product', momentum: 76, relevance: 82, views: '680K' },
+    { title: 'The tiny rituals that make a weekday feel better', chineseTitle: '让工作日变舒服的小仪式', source: 'Local signal stream', category: 'lifestyle', categoryLabel: '生活方式', categoryKey: 'LIFESTYLE', momentum: 79, relevance: 84, views: '1.2M' },
+    { title: 'The 15-minute dinner people keep making', chineseTitle: '大家反复做的 15 分钟晚餐', source: 'Local signal stream', category: 'food', categoryLabel: '美食餐饮', categoryKey: 'FOOD', momentum: 83, relevance: 91, views: '920K' },
+    { title: 'The weekend trail that feels like a reset', chineseTitle: '让周末重新充满电的户外路线', source: 'Local signal stream', category: 'travel', categoryLabel: '旅行户外', categoryKey: 'TRAVEL', momentum: 76, relevance: 82, views: '680K' },
   ]
   const item = candidates[Math.floor(Date.now() / 60000) % candidates.length]
   return {
@@ -21,12 +21,12 @@ function demoObservation() {
     competition: '低',
     status: '新发现',
     statusTone: 'positive',
-    audience: '25-34 · 城市通勤 · 购车决策',
+    audience: '25-34 · global lifestyle audience',
     whyNow: '实时事件流发现相关内容密度上升，账号当前内容结构具备切入空间。',
-    gap: '需要把抽象的产品优势翻译成用户可以转发和讨论的生活判断。',
+    gap: '需要把抽象趋势翻译成用户可以转发和讨论的真实生活场景。',
     action: '先收录到候选内容池，再进入爆款拆解验证表达机制。',
     tags: ['实时发现', '低竞争', '可验证'],
-    sourcePost: 'The best features are the ones that make an ordinary weekday feel a little easier.',
+    sourcePost: 'The best ideas are the ones that make an ordinary day feel a little easier.',
   }
 }
 

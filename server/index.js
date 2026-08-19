@@ -111,7 +111,7 @@ async function handleApi(request, response, url) {
     const { trend } = await readBody(request)
     if (!trend?.id) return sendJson(response, 400, { error: 'trend.id is required' })
     const next = await updateState((state) => {
-      const candidate = { id: trend.id, title: trend.title, source: trend.source, status: '待分析', addedAt: new Date().toISOString() }
+      const candidate = { id: trend.id, title: trend.title, source: trend.source, category: trend.category, categoryLabel: trend.categoryLabel, categoryKey: trend.categoryKey, status: '待分析', addedAt: new Date().toISOString() }
       const pool = [candidate, ...(state.candidatePool || []).filter((item) => item.id !== candidate.id)].slice(0, 30)
       return { ...state, candidatePool: pool, activity: [{ time: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }), text: `已收录候选内容：${trend.title}`, type: 'insight' }, ...state.activity].slice(0, 30) }
     })
