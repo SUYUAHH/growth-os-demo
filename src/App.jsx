@@ -18,7 +18,7 @@ import Dashboard from './modules/Dashboard'
 import Remix from './modules/Remix'
 import Distribution from './modules/Distribution'
 import { addCandidate, completeAction as completeActionRequest, completeLeaderTask as completeLeaderTaskRequest, createLeaderTask as createLeaderTaskRequest, generateDailyReport as generateDailyReportRequest, generateRemix, getState, promoteBenchmarkStrategy, queueReview, runMonitor, saveAsset as saveAssetRequest, startMonitor, stopMonitor, updateCandidate } from './lib/api'
-import { getInterfaceCopy, navLabels } from './lib/i18n'
+import { getInterfaceCopy, navLabels, uiText } from './lib/i18n'
 
 function App() {
   const [activeModule, setActiveModule] = useState('dashboard')
@@ -36,6 +36,26 @@ function App() {
   const [remixResult, setRemixResult] = useState(null)
   const [remixGenerating, setRemixGenerating] = useState(false)
   const [language, setLanguage] = useState(() => window.localStorage.getItem('growth-os-language') || 'original')
+  useEffect(() => {
+    const root = document.querySelector('.app-shell')
+    if (!root || language !== 'zh') return undefined
+    const translate = () => {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT)
+      const nodes = []
+      let node
+      while ((node = walker.nextNode())) nodes.push(node)
+      nodes.forEach((textNode) => {
+        const value = textNode.nodeValue.trim()
+        if (!value || textNode.parentElement?.closest('.account-copy, .signal-title, .detail-en, .source-post, textarea, input')) return
+        const translated = uiText(value, language)
+        if (translated !== value) textNode.nodeValue = textNode.nodeValue.replace(value, translated)
+      })
+    }
+    translate()
+    const observer = new MutationObserver(translate)
+    observer.observe(root, { childList: true, subtree: true })
+    return () => observer.disconnect()
+  }, [language, activeModule, serverState, selectedTrend, remixResult, completedActions])
   useEffect(() => {
     let mounted = true
     const sync = async () => {
@@ -241,6 +261,7 @@ function App() {
     setLanguage(nextLanguage)
     window.localStorage.setItem('growth-os-language', nextLanguage)
     showToast(nextLanguage === 'zh' ? '界面已切换为中文' : 'Interface restored to original language')
+    window.setTimeout(() => window.location.reload(), 0)
   }
 
   const liveTrends = serverState?.trends?.length ? serverState.trends : trends
@@ -317,10 +338,10 @@ function App() {
         </div>
 
         <div className="page-wrap">
-          {activeModule === 'dashboard' && <Dashboard accounts={serverState?.accounts} candidateCount={serverState?.candidatePool?.length || 0} assets={serverState?.assets} leaderTasks={serverState?.leaderTasks} activity={serverState?.activity} onOpenAccount={openAccountCockpit} onDemoAction={showToast} />}
-          {activeModule === 'intelligence' && <Intelligence trends={liveTrends} selectedTrend={selectedTrend} onSelectTrend={openTrend} onOpenRemix={openRemix} onAddCandidate={handleAddCandidate} onCandidateStatus={handleCandidateStatus} candidatePool={serverState?.candidatePool} candidateCount={serverState?.candidatePool?.length || 0} onRefresh={handleRunMonitor} syncing={syncing} managedAccounts={serverState?.accounts} focusedAccountId={focusedAccountId} leaderTasks={serverState?.leaderTasks} dailyReports={serverState?.dailyReports} benchmarkStrategies={serverState?.benchmarkStrategies} onGenerateReport={handleGenerateDailyReport} onCreateLeaderTask={handleCreateLeaderTask} onCompleteLeaderTask={handleCompleteLeaderTask} onPromoteStrategy={handlePromoteStrategy} />}
-          {activeModule === 'remix' && <Remix trend={selectedTrend} activeConceptId={activeConceptId} draft={draft} savedConcepts={savedConcepts} generated={remixResult} generating={remixGenerating} onGenerate={handleGenerateRemix} onSelectConcept={selectConcept} onDraftChange={setDraft} onSave={saveConcept} onOpenDistribution={() => setActiveModule('distribution')} />}
-          {activeModule === 'distribution' && <Distribution trend={selectedTrend} draft={draft} completedActions={completedActions} onComplete={completeAction} onQueueReview={handleQueueReview} onOpenRemix={() => setActiveModule('remix')} activity={serverState?.activity} />}
+          {activeModule === 'dashboard' && <Dashboard language={language} accounts={serverState?.accounts} candidateCount={serverState?.candidatePool?.length || 0} assets={serverState?.assets} leaderTasks={serverState?.leaderTasks} activity={serverState?.activity} onOpenAccount={openAccountCockpit} onDemoAction={showToast} />}
+          {activeModule === 'intelligence' && <Intelligence language={language} trends={liveTrends} selectedTrend={selectedTrend} onSelectTrend={openTrend} onOpenRemix={openRemix} onAddCandidate={handleAddCandidate} onCandidateStatus={handleCandidateStatus} candidatePool={serverState?.candidatePool} candidateCount={serverState?.candidatePool?.length || 0} onRefresh={handleRunMonitor} syncing={syncing} managedAccounts={serverState?.accounts} focusedAccountId={focusedAccountId} leaderTasks={serverState?.leaderTasks} dailyReports={serverState?.dailyReports} benchmarkStrategies={serverState?.benchmarkStrategies} onGenerateReport={handleGenerateDailyReport} onCreateLeaderTask={handleCreateLeaderTask} onCompleteLeaderTask={handleCompleteLeaderTask} onPromoteStrategy={handlePromoteStrategy} />}
+          {activeModule === 'remix' && <Remix language={language} trend={selectedTrend} activeConceptId={activeConceptId} draft={draft} savedConcepts={savedConcepts} generated={remixResult} generating={remixGenerating} onGenerate={handleGenerateRemix} onSelectConcept={selectConcept} onDraftChange={setDraft} onSave={saveConcept} onOpenDistribution={() => setActiveModule('distribution')} />}
+          {activeModule === 'distribution' && <Distribution language={language} trend={selectedTrend} draft={draft} completedActions={completedActions} onComplete={completeAction} onQueueReview={handleQueueReview} onOpenRemix={() => setActiveModule('remix')} activity={serverState?.activity} />}
         </div>
       </main>
 
