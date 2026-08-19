@@ -10,6 +10,7 @@ import {
   normalizeGrowthState,
 } from '../server/growthEngine.js'
 import { getSelectedVisibleTrend } from '../src/lib/trendSelection.js'
+import { getInterfaceCopy, navLabels } from '../src/lib/i18n.js'
 
 const baseState = {
   accounts: [{ id: 'account-1', name: 'North Star', health: 68, issue: 'Hook retention is low', action: 'Test a personal opener.' }],
@@ -101,4 +102,11 @@ test('keeps the hotspot detail inside the active category filter', () => {
   assert.equal(getSelectedVisibleTrend(visible, { id: 'travel-trend' }).id, 'food-trend')
   assert.equal(getSelectedVisibleTrend(visible, { id: 'food-trend-2' }).id, 'food-trend-2')
   assert.equal(getSelectedVisibleTrend([], { id: 'travel-trend' }).id, 'travel-trend')
+})
+
+test('provides original and Chinese interface copy for the language switch', () => {
+  assert.equal(getInterfaceCopy('original').language, 'Language')
+  assert.equal(getInterfaceCopy('zh').language, '界面语言')
+  assert.equal(navLabels.original.dashboard.label, 'Overview')
+  assert.equal(navLabels.zh.dashboard.label, '总仪表盘')
 })

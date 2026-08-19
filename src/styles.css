@@ -46,6 +46,14 @@ button:focus-visible, textarea:focus-visible { outline: 3px solid rgba(45, 101, 
 .account-copy span { font-size: 10px; color: #89958c; }
 .muted-icon { color: #829087; flex: 0 0 auto; }
 .main-nav { margin-top: 33px; }
+.language-switcher { padding: 13px 10px 0; margin-top: 17px; border-top: 1px solid #3a423c; }
+.language-switcher-head { display: flex; align-items: center; gap: 6px; color: #a8b3aa; font-size: 10px; }
+.language-switcher-head svg { color: #d6e6a7; }
+.language-hint { margin-left: auto; color: #68766d; font-size: 8px; letter-spacing: .08em; text-transform: uppercase; }
+.language-options { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; padding: 3px; margin-top: 8px; border: 1px solid #3d4840; border-radius: 5px; background: #29322d; }
+.language-options button { padding: 6px 4px; color: #8c9a90; border-radius: 3px; background: transparent; font-size: 9px; }
+.language-options button:hover { color: #edf1eb; }
+.language-options .language-active { color: #26352b; background: #d6e6a7; font-weight: 700; }
 .nav-section-title { margin: 0 10px 9px; }
 .nav-item { width: 100%; display: flex; align-items: center; gap: 10px; padding: 11px 10px; margin-bottom: 5px; text-align: left; color: #929d95; background: transparent; border-radius: 7px; transition: .18s ease; }
 .nav-item:hover { color: #edf1eb; background: #2a312c; }

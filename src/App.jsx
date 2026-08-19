@@ -6,6 +6,7 @@ import {
   CircleHelp,
   Command,
   LayoutDashboard,
+  Languages,
   Menu,
   PanelLeftClose,
   PanelLeftOpen,
@@ -17,6 +18,7 @@ import Dashboard from './modules/Dashboard'
 import Remix from './modules/Remix'
 import Distribution from './modules/Distribution'
 import { addCandidate, completeAction as completeActionRequest, completeLeaderTask as completeLeaderTaskRequest, createLeaderTask as createLeaderTaskRequest, generateDailyReport as generateDailyReportRequest, generateRemix, getState, promoteBenchmarkStrategy, queueReview, runMonitor, saveAsset as saveAssetRequest, startMonitor, stopMonitor, updateCandidate } from './lib/api'
+import { getInterfaceCopy, navLabels } from './lib/i18n'
 
 function App() {
   const [activeModule, setActiveModule] = useState('dashboard')
@@ -33,6 +35,7 @@ function App() {
   const [syncing, setSyncing] = useState(false)
   const [remixResult, setRemixResult] = useState(null)
   const [remixGenerating, setRemixGenerating] = useState(false)
+  const [language, setLanguage] = useState(() => window.localStorage.getItem('growth-os-language') || 'original')
   useEffect(() => {
     let mounted = true
     const sync = async () => {
@@ -231,7 +234,15 @@ function App() {
     }
   }
 
-  const activeItem = navItems.find((item) => item.id === activeModule)
+  const copy = getInterfaceCopy(language)
+  const translatedNavItems = navItems.map((item) => ({ ...item, ...(navLabels[language === 'zh' ? 'zh' : 'original'][item.id] || {}) }))
+  const activeItem = translatedNavItems.find((item) => item.id === activeModule)
+  const toggleLanguage = (nextLanguage) => {
+    setLanguage(nextLanguage)
+    window.localStorage.setItem('growth-os-language', nextLanguage)
+    showToast(nextLanguage === 'zh' ? '界面已切换为中文' : 'Interface restored to original language')
+  }
+
   const liveTrends = serverState?.trends?.length ? serverState.trends : trends
   const monitor = serverState?.monitor || { enabled: false, mode: 'demo', lastResult: '等待 API 服务' }
 
@@ -249,7 +260,7 @@ function App() {
           </button>
         </div>
 
-        <div className="workspace-label">WORKSPACE</div>
+        <div className="workspace-label">{copy.workspace}</div>
         <div className="account-switcher">
           <div className="account-avatar">{account.avatar}</div>
           <div className="account-copy"><strong>{account.name}</strong><span>{account.handle}</span></div>
@@ -257,8 +268,8 @@ function App() {
         </div>
 
         <nav className="main-nav" aria-label="主导航">
-          <div className="nav-section-title">OPERATIONS</div>
-          {navItems.map((item) => {
+          <div className="nav-section-title">{copy.operations}</div>
+          {translatedNavItems.map((item) => {
             const Icon = item.id === 'dashboard' ? LayoutDashboard : item.id === 'intelligence' ? Activity : Sparkles
             return (
               <button key={item.id} className={`nav-item ${activeModule === item.id ? 'nav-active' : ''}`} onClick={() => setActiveModule(item.id)}>
@@ -270,31 +281,39 @@ function App() {
           })}
         </nav>
 
+        <div className="language-switcher" aria-label={copy.language}>
+          <div className="language-switcher-head"><Languages size={14} /><span>{copy.language}</span><span className="language-hint">{language === 'zh' ? copy.translationHint : 'EN'}</span></div>
+          <div className="language-options" role="group" aria-label={copy.toggleLabel}>
+            <button className={language === 'original' ? 'language-active' : ''} onClick={() => toggleLanguage('original')} aria-pressed={language === 'original'}>{copy.original}</button>
+            <button className={language === 'zh' ? 'language-active' : ''} onClick={() => toggleLanguage('zh')} aria-pressed={language === 'zh'}>{copy.translated}</button>
+          </div>
+        </div>
+
         <div className="sidebar-spacer" />
         <div className="agent-status">
           <div className="status-orbit"><span /></div>
-          <div><strong>3 Agents ready</strong><span>Data synced 09:42</span></div>
+          <div><strong>{copy.agentReady}</strong><span>{copy.synced}</span></div>
           <CircleHelp size={15} className="muted-icon" />
         </div>
-        <div className="sidebar-footer"><span>DEMO ENVIRONMENT</span><span>v0.1.0</span></div>
+        <div className="sidebar-footer"><span>{copy.environment}</span><span>v0.1.0</span></div>
       </aside>
 
       <main className="main-area">
         <header className="topbar">
           <div className="topbar-left">
-            {!sidebarOpen && <button className="icon-button" onClick={() => setSidebarOpen(true)} aria-label="展开侧栏" title="展开侧栏"><PanelLeftOpen size={17} /></button>}
-            <button className="mobile-menu icon-button" onClick={() => setSidebarOpen((current) => !current)} aria-label="打开导航"><Menu size={18} /></button>
-            <div className="breadcrumbs"><span>WORKSPACE</span><ChevronRight size={13} /><strong>{activeItem?.label}</strong></div>
+            {!sidebarOpen && <button className="icon-button" onClick={() => setSidebarOpen(true)} aria-label={copy.expanded} title={copy.expanded}><PanelLeftOpen size={17} /></button>}
+            <button className="mobile-menu icon-button" onClick={() => setSidebarOpen((current) => !current)} aria-label={copy.openNavigation}><Menu size={18} /></button>
+            <div className="breadcrumbs"><span>{copy.workspace}</span><ChevronRight size={13} /><strong>{activeItem?.label}</strong></div>
           </div>
           <div className="topbar-actions">
-            <button className={`sync-chip monitor-chip ${monitor.enabled ? 'monitor-on' : 'monitor-off'}`} onClick={handleMonitorToggle} title="切换后台实时监测"><span className="sync-dot" /> {monitor.enabled ? 'MONITOR ON' : 'MONITOR OFF'} · {serverOnline ? monitor.mode.toUpperCase() : 'OFFLINE'}</button>
-            <button className="icon-button" aria-label="通知" title="通知"><Bell size={17} /></button>
-            <div className="profile-chip"><span className="profile-avatar">SY</span><span className="profile-name">Operator</span><ChevronRight size={13} /></div>
+            <button className={`sync-chip monitor-chip ${monitor.enabled ? 'monitor-on' : 'monitor-off'}`} onClick={handleMonitorToggle} title="切换后台实时监测"><span className="sync-dot" /> {monitor.enabled ? copy.monitorOn : copy.monitorOff} · {serverOnline ? monitor.mode.toUpperCase() : 'OFFLINE'}</button>
+            <button className="icon-button" aria-label={copy.notifications} title={copy.notifications}><Bell size={17} /></button>
+            <div className="profile-chip"><span className="profile-avatar">SY</span><span className="profile-name">{copy.operator}</span><ChevronRight size={13} /></div>
           </div>
         </header>
 
         <div className="mobile-nav-row">
-          {navItems.map((item) => <button key={item.id} className={activeModule === item.id ? 'mobile-nav-active' : ''} onClick={() => setActiveModule(item.id)}>{item.label}</button>)}
+          {translatedNavItems.map((item) => <button key={item.id} className={activeModule === item.id ? 'mobile-nav-active' : ''} onClick={() => setActiveModule(item.id)}>{item.label}</button>)}
         </div>
 
         <div className="page-wrap">
