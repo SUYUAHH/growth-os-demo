@@ -2,6 +2,9 @@ import { useEffect, useMemo, useState } from 'react'
 import { AlertTriangle, ChevronLeft, ChevronRight, CirclePlus, ClipboardCheck, ExternalLink, LayoutDashboard, ShieldAlert, TrendingUp, UsersRound } from 'lucide-react'
 import SectionHeader from '../components/SectionHeader'
 import StatusPill from '../components/StatusPill'
+import GrowthFunnelBoard from '../components/GrowthFunnelBoard'
+import MarketKOLBoard from '../components/MarketKOLBoard'
+import AttributionExperimentBoard from '../components/AttributionExperimentBoard'
 
 const connectionTones = { '已连接': 'positive', '待授权': 'warning', 'Token 即将过期': 'warning', '数据异常': 'negative' }
 
@@ -37,6 +40,10 @@ export default function Dashboard({ accounts = [], candidateCount, assets = [], 
       <div className="page-hero dashboard-hero"><div><div className="eyebrow"><LayoutDashboard size={14} /> EXECUTIVE OVERVIEW <span className="eyebrow-line" /></div><h1>全部账号，今天发生了什么？</h1><p className="hero-copy">跨账号看增长、内容与风险；需要具体处理时，再下钻进入增长情报驾驶舱。</p></div><div className="hero-actions"><button className="secondary-button" onClick={() => onDemoAction('账号连接为 Demo 状态；真实 X OAuth 需要后续配置开发者凭据。')}><CirclePlus size={15} />添加账号</button><button className="primary-button" onClick={() => onDemoAction('连接 X 为演示入口，不会发起真实授权。')}><ExternalLink size={15} />连接 X</button></div></div>
 
       <div className="portfolio-summary"><div><span>管理账号</span><strong>{accounts.length.toString().padStart(2, '0')}</strong><small>{portfolio.metrics.filter((item) => item.connectionStatus === '已连接').length} 已连接</small></div><div><span>总曝光</span><strong>{formatCompact(portfolio.totals.impressions)}</strong><small className="positive-copy">+18.6% vs. last week</small></div><div><span>平均点赞率</span><strong>{portfolio.totals.likeRate}%</strong><small className="positive-copy">+0.8pt</small></div><div><span>平均互动率</span><strong>{portfolio.totals.engagementRate}%</strong><small>评论 / 收藏综合</small></div><div><span>待处理</span><strong>{`${openTasks.length + riskAccounts.length}`.padStart(2, '0')}</strong><small className="risk-copy">风险 / Leader 任务</small></div></div>
+
+      <GrowthFunnelBoard />
+      <MarketKOLBoard />
+      <AttributionExperimentBoard assets={assets} />
 
       <div className="dashboard-grid-top"><section className="section-block dashboard-surface trend-surface"><SectionHeader eyebrow="01 · PORTFOLIO TREND" title="近 7 日账号组合表现" detail="曝光与互动趋势用于判断整体经营是否健康。" action={<span className="queue-count">7 days</span>} /><div className="trend-plot"><Sparkline values={portfolio.trend} /><div className="trend-axis"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div></div><div className="trend-legend"><span><i className="legend-dot legend-green" />曝光趋势</span><span><i className="legend-dot legend-blue" />互动趋势</span><strong>组合健康度 {Math.round(accounts.reduce((sum, account) => sum + account.health, 0) / Math.max(accounts.length, 1))}/100</strong></div></section><section className="section-block dashboard-surface funnel-surface"><SectionHeader eyebrow="02 · CONTENT FUNNEL" title="内容经营漏斗" detail="从机会发现到进入审核的转化。" /><div className="funnel-stack"><div style={{ width: '100%' }}><span>热点发现</span><b>{String(12).padStart(2, '0')}</b></div><div style={{ width: '83%' }}><span>候选内容</span><b>{String(candidateCount).padStart(2, '0')}</b></div><div style={{ width: '62%' }}><span>内容资产</span><b>{String(assets.length).padStart(2, '0')}</b></div><div style={{ width: '43%' }}><span>待审核</span><b>{String(reviewCount).padStart(2, '0')}</b></div></div></section></div>
 

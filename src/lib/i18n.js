@@ -4,12 +4,15 @@ export const navLabels = {
     intelligence: { label: 'Growth Intelligence', description: 'Signals · Review · Benchmarks' },
     remix: { label: 'Viral Remix', description: 'Structure · Concepts · Draft' },
     distribution: { label: 'Distribution', description: 'Publish · Health · Review' },
+    assets: { label: 'Content Assets', description: 'Review · Media · Queue' },
   },
   zh: {
     dashboard: { label: '总仪表盘', description: '全局 · 账号 · 预警' },
     intelligence: { label: '增长情报', description: '热点 · 复盘 · 对标' },
     remix: { label: '爆款拆解', description: '结构 · 选题 · 二创' },
     distribution: { label: '分发优化', description: '发布 · 健康 · 复盘' },
+    assets: { label: '内容资产', description: '审核 · 素材 · 待发布' },
+    assets: { label: '内容资产', description: '审核 · 素材 · 待发布' },
   },
 }
 

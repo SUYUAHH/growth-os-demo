@@ -1,0 +1,8 @@
+import { Globe2, Handshake, UsersRound } from 'lucide-react'
+import { buildKOLPipeline, buildMarketPlaybook } from '../lib/growthOps.js'
+
+export default function MarketKOLBoard() {
+  const markets = buildMarketPlaybook()
+  const kol = buildKOLPipeline()
+  return <section className="growth-strategy-grid"><div className="section-block market-playbook"><div className="growth-board-head"><div><span className="eyebrow"><Globe2 size={13} /> MARKET PLAYBOOK</span><h2>海外市场策略</h2><p>同一个 AI 产品，在不同市场需要不同的内容角度、渠道和激活动作。</p></div></div><div className="market-playbook-list">{markets.map((market) => <article key={market.key}><div className="market-title"><strong>{market.key}</strong><span>{market.platforms.join(' · ')}</span></div><p>{market.contentAngle}</p><small>合规重点：{market.compliance}</small><em>激活动作：{market.activation}</em></article>)}</div></div><div className="section-block kol-pipeline"><div className="growth-board-head"><div><span className="eyebrow"><Handshake size={13} /> KOL ECOSYSTEM</span><h2>海外 KOL 合作池</h2><p>从收录账号升级为可评估、可合作、可复盘的圈层资产。</p></div><span className="queue-count"><UsersRound size={13} /> {kol.total} 个</span></div><div className="kol-stage-strip">{Object.entries(kol.byStage).map(([stage, count]) => <span key={stage}><b>{count}</b>{stage}</span>)}</div><div className="kol-list">{kol.items.map((item) => <div className="kol-row" key={item.id}><span className="kol-avatar">{item.name.slice(0, 2)}</span><div><strong>{item.name}</strong><small>{item.market} · {item.tier} · {item.followers.toLocaleString('zh-CN')} 粉丝</small></div><span className="kol-goal">{item.goal}<b>{item.stage}</b></span></div>)}</div></div></section>
+}

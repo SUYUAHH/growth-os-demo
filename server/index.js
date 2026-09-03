@@ -3,10 +3,10 @@ import { readFile } from 'node:fs/promises'
 import { extname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { getState, stateFilePath, updateState } from './store.js'
-import { isXConfigured, xStatus } from './xClient.js'
+import { demoCapturedPosts, fetchRecentTweets, fetchUser, fetchUserTweets, isXConfigured, xStatus } from './xClient.js'
 import { runMonitor, scheduleMonitor, startMonitor, stopMonitor } from './monitor.js'
 import { agentStatus, generateRemix } from './agentEngine.js'
-import { completeLeaderTask, createCandidateFromStrategy, createLeaderTask, generateDailyReport } from './growthEngine.js'
+import { addBenchmarkAccount, applyRuleReview, assignCandidate, completeLeaderTask, createCandidateFromCapturedPost, createCandidateFromStrategy, createContentAsset, createLeaderTask, generateDailyReport, prepareAssetForPublish, recordPublishedPerformance, saveCapturedPosts, transitionAsset, transitionCandidate } from './growthEngine.js'
 
 const rootDir = join(fileURLToPath(new URL('.', import.meta.url)), '..')
 
@@ -41,6 +41,36 @@ async function handleApi(request, response, url) {
   if (request.method === 'GET' && url.pathname === '/api/health') return sendJson(response, 200, { ok: true, service: 'growth-os-server', now: new Date().toISOString() })
   if (request.method === 'GET' && url.pathname === '/api/state') return sendJson(response, 200, publicState(await getState()))
   if (request.method === 'GET' && url.pathname === '/api/x/status') return sendJson(response, 200, xStatus())
+  if (request.method === 'POST' && url.pathname === '/api/capture/keywords') {
+    try {
+      const body = await readBody(request)
+      const posts = isXConfigured() ? await fetchRecentTweets(body.query, { limit: body.limit }) : demoCapturedPosts('keyword', body.query || 'default')
+      return sendJson(response, 200, publicState(await updateState((state) => saveCapturedPosts(state, posts, { sourceType: 'keyword', query: body.query || 'AI OR OpenAI OR SaaS' }))))
+    } catch (error) { return sendJson(response, error.code === 'X_NOT_CONFIGURED' ? 400 : 502, { error: error.message, x: xStatus() }) }
+  }
+  if (request.method === 'POST' && url.pathname === '/api/benchmark-accounts') {
+    try { const body = await readBody(request); return sendJson(response, 201, publicState(await updateState((state) => addBenchmarkAccount(state, body)))) } catch (error) { return sendJson(response, 400, { error: error.message }) }
+  }
+  if (request.method === 'POST' && url.pathname === '/api/benchmark-accounts/capture') {
+    try {
+      const body = await readBody(request)
+      const state = await getState()
+      const account = state.benchmarkAccounts.find((item) => item.id === body.accountId)
+      if (!account) return sendJson(response, 404, { error: '找不到对标账号' })
+      let posts
+      if (isXConfigured()) { const user = await fetchUser(account.username); posts = await fetchUserTweets(user, { limit: body.limit }) } else posts = demoCapturedPosts('benchmark-account', account.id, account.username)
+      return sendJson(response, 200, publicState(await updateState((current) => saveCapturedPosts(current, posts, { sourceType: 'benchmark-account', sourceId: account.id, query: account.handle }))))
+    } catch (error) { return sendJson(response, error.code === 'X_NOT_CONFIGURED' ? 400 : 502, { error: error.message, x: xStatus() }) }
+  }
+  if (request.method === 'POST' && url.pathname === '/api/capture/collect') {
+    try {
+      const { postId } = await readBody(request)
+      const state = await getState()
+      const post = state.contentLibrary?.find((item) => item.id === postId)
+      if (!post) return sendJson(response, 404, { error: '找不到抓取内容' })
+      return sendJson(response, 201, publicState(await updateState((current) => createCandidateFromCapturedPost(current, post))))
+    } catch (error) { return sendJson(response, 400, { error: error.message }) }
+  }
   if (request.method === 'GET' && url.pathname === '/api/agent/status') return sendJson(response, 200, agentStatus())
   if (request.method === 'GET' && url.pathname === '/api/growth/daily-report') {
     const state = await getState()
@@ -84,7 +114,7 @@ async function handleApi(request, response, url) {
   if (request.method === 'POST' && url.pathname === '/api/assets') {
     const body = await readBody(request)
     const next = await updateState((state) => {
-      const asset = { ...body, id: body.id || `asset-${Date.now()}`, status: '待审核', savedAt: new Date().toISOString() }
+      const asset = { ...createContentAsset(body), ...body, id: body.id || `asset-${Date.now()}`, status: '待审核', savedAt: new Date().toISOString() }
       const assets = [asset, ...state.assets.filter((item) => item.id !== asset.id)]
       return { ...state, assets, activity: [{ time: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }), text: '内容资产已保存，进入人工审核队列', type: 'save' }, ...state.activity].slice(0, 30) }
     })
@@ -107,22 +137,37 @@ async function handleApi(request, response, url) {
     })
     return sendJson(response, 200, publicState(next))
   }
+  if (request.method === 'POST' && url.pathname === '/api/assets/status') {
+    try { const { id, status } = await readBody(request); return sendJson(response, 200, publicState(await updateState((state) => transitionAsset(state, id, status)))) } catch (error) { return sendJson(response, 400, { error: error.message }) }
+  }
+  if (request.method === 'POST' && url.pathname === '/api/assets/prepare') {
+    try { const { id, ...input } = await readBody(request); return sendJson(response, 200, publicState(await updateState((state) => prepareAssetForPublish(state, id, input)))) } catch (error) { return sendJson(response, 400, { error: error.message }) }
+  }
+  if (request.method === 'POST' && url.pathname === '/api/assets/performance') {
+    try {
+      const { assetId, metrics } = await readBody(request)
+      return sendJson(response, 200, publicState(await updateState((state) => recordPublishedPerformance(state, assetId, metrics))))
+    } catch (error) { return sendJson(response, 400, { error: error.message }) }
+  }
   if (request.method === 'POST' && url.pathname === '/api/candidates') {
     const { trend } = await readBody(request)
     if (!trend?.id) return sendJson(response, 400, { error: 'trend.id is required' })
-    const next = await updateState((state) => {
-      const candidate = { id: trend.id, title: trend.title, source: trend.source, category: trend.category, categoryLabel: trend.categoryLabel, categoryKey: trend.categoryKey, status: '待分析', addedAt: new Date().toISOString() }
-      const pool = [candidate, ...(state.candidatePool || []).filter((item) => item.id !== candidate.id)].slice(0, 30)
-      return { ...state, candidatePool: pool, activity: [{ time: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }), text: `已收录候选内容：${trend.title}`, type: 'insight' }, ...state.activity].slice(0, 30) }
-    })
+    const post = { id: trend.id, text: trend.title, sourceType: trend.source, category: trend.category, categoryLabel: trend.categoryLabel, categoryKey: trend.categoryKey, author: { followers: trend.followers }, metrics: { likes: trend.likes, replies: trend.comments, impressions: trend.views }, media: trend.media || [], createdAt: new Date().toISOString() }
+    const next = await updateState((state) => createCandidateFromCapturedPost(state, post))
     return sendJson(response, 201, publicState(next))
   }
   if (request.method === 'POST' && url.pathname === '/api/candidates/status') {
     const { id, status } = await readBody(request)
-    const allowed = new Set(['待分析', '已进入拆解', '已忽略'])
-    if (!id || !allowed.has(status)) return sendJson(response, 400, { error: 'id and a valid status are required' })
-    const next = await updateState((state) => ({ ...state, candidatePool: (state.candidatePool || []).map((item) => item.id === id ? { ...item, status } : item), activity: [{ time: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }), text: `候选内容状态更新：${status}`, type: 'review' }, ...state.activity].slice(0, 30) }))
-    return sendJson(response, 200, publicState(next))
+    try { return sendJson(response, 200, publicState(await updateState((state) => transitionCandidate(state, id, status)))) } catch (error) { return sendJson(response, 400, { error: error.message }) }
+  }
+  if (request.method === 'POST' && url.pathname === '/api/candidates/assign') {
+    try { const { id, accountId } = await readBody(request); return sendJson(response, 200, publicState(await updateState((state) => assignCandidate(state, id, accountId)))) } catch (error) { return sendJson(response, 400, { error: error.message }) }
+  }
+  if (request.method === 'POST' && url.pathname === '/api/candidates/transition') {
+    try { const { id, status } = await readBody(request); return sendJson(response, 200, publicState(await updateState((state) => transitionCandidate(state, id, status)))) } catch (error) { return sendJson(response, 400, { error: error.message }) }
+  }
+  if (request.method === 'POST' && url.pathname === '/api/knowledge/review') {
+    try { const { candidateId, review } = await readBody(request); return sendJson(response, 200, publicState(await updateState((state) => applyRuleReview(state, candidateId, review)))) } catch (error) { return sendJson(response, 400, { error: error.message }) }
   }
   if (request.method === 'POST' && url.pathname === '/api/analysis/remix') {
     const body = await readBody(request)

@@ -1,0 +1,9 @@
+import { useMemo } from 'react'
+import { AlertTriangle, Info } from 'lucide-react'
+import { buildHealthScore, healthRules } from '../../server/growthEngine.js'
+
+export default function AccountHealthBreakdown({ account = {} }) {
+  const summary = useMemo(() => buildHealthScore(account), [account])
+  const risk = summary.dimensions.filter((item) => item.value < 65).sort((left, right) => left.value - right.value)[0]
+  return <section className="health-breakdown-card"><div className="health-breakdown-card-head"><div><span className="eyebrow">ACCOUNT HEALTH MODEL</span><h3>账号健康度构成</h3><p>分数由五个维度加权计算，便于定位问题和安排动作。</p></div><div className="health-score-badge"><strong>{summary.score}</strong><small>/100</small></div></div><div className="health-dimension-list">{summary.dimensions.map((item) => <div className="health-dimension-row" key={item.label}><div className="health-dimension-label"><strong>{item.label}</strong><span>权重 {item.weight}%</span></div><div className="health-dimension-track"><i style={{ width: `${item.value}%` }} /></div><b>{item.value}</b></div>)}</div><div className={`health-explanation ${risk ? 'health-explanation-risk' : ''}`}><Info size={14} />{risk ? <span><strong>优先关注：{risk.label}</strong> 当前得分 {risk.value}，建议结合下方问题卡创建 Leader 任务。</span> : <span><strong>当前状态稳定</strong> 五个维度没有明显短板，继续观察趋势变化。</span>}{risk && <AlertTriangle size={14} />}</div><div className="health-rules"><div className="health-rules-head"><strong>健康度规则库</strong><span>点击下方规则查看判断口径</span></div>{healthRules.map((rule) => <details key={rule.id} className="health-rule"><summary><span><strong>{rule.label}</strong><small>权重 {rule.weight}%</small></span><i>查看规则</i></summary><div><p><b>良好：</b>{rule.good}</p><p><b>预警：</b>{rule.warning}</p><p><b>动作：</b>{rule.action}</p></div></details>)}</div></section>
+}

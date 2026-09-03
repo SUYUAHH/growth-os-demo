@@ -12,13 +12,39 @@ import {
   PanelLeftOpen,
   Sparkles,
 } from 'lucide-react'
-import { account, concepts, navItems, trends } from './data/mockData'
+import { account, concepts, managedAccounts, navItems, trends } from './data/mockData'
 import Intelligence from './modules/Intelligence'
 import Dashboard from './modules/Dashboard'
 import Remix from './modules/Remix'
 import Distribution from './modules/Distribution'
-import { addCandidate, completeAction as completeActionRequest, completeLeaderTask as completeLeaderTaskRequest, createLeaderTask as createLeaderTaskRequest, generateDailyReport as generateDailyReportRequest, generateRemix, getState, promoteBenchmarkStrategy, queueReview, runMonitor, saveAsset as saveAssetRequest, startMonitor, stopMonitor, updateCandidate } from './lib/api'
+import CaptureWorkbench from './components/CaptureWorkbench'
+import Assets from './modules/Assets'
+import { addBenchmarkAccount as addBenchmarkAccountRequest, addCandidate, assignCandidate as assignCandidateRequest, captureBenchmarkAccount, captureKeywords, collectCapturedPost, completeAction as completeActionRequest, completeLeaderTask as completeLeaderTaskRequest, createLeaderTask as createLeaderTaskRequest, generateDailyReport as generateDailyReportRequest, generateRemix, getState, prepareAssetForPublish as prepareAssetForPublishRequest, promoteBenchmarkStrategy, queueReview, recordPublishedPerformance as recordPublishedPerformanceRequest, reviewKnowledgeRule, runMonitor, saveAsset as saveAssetRequest, startMonitor, stopMonitor, transitionAsset as transitionAssetRequest, updateCandidate } from './lib/api'
 import { getInterfaceCopy, navLabels, uiText } from './lib/i18n'
+
+function createLocalCandidate(trend, accounts) {
+  const targetAccount = accounts.find((item) => item.category === trend.category)
+  return {
+    id: `local-${trend.id}`,
+    postId: trend.id,
+    title: trend.title,
+    source: trend.source,
+    category: trend.category,
+    categoryLabel: trend.categoryLabel,
+    categoryKey: trend.categoryKey,
+    accountId: targetAccount?.id || null,
+    accountName: targetAccount?.name || '未分配账号',
+    poolScope: targetAccount ? 'account' : 'global',
+    status: targetAccount ? '待拆解' : '待分配',
+    addedAt: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+    author: { followers: trend.followers },
+    metrics: { likes: trend.likes, replies: trend.comments, impressions: trend.views },
+    media: trend.media || [],
+    statusHistory: [{ status: targetAccount ? '待拆解' : '待分配', at: new Date().toISOString(), actor: 'operator' }],
+    ruleReviews: [],
+  }
+}
 
 function App() {
   const [activeModule, setActiveModule] = useState('dashboard')
@@ -28,7 +54,7 @@ function App() {
   const [draft, setDraft] = useState(concepts[0].draft)
   const [savedConcepts, setSavedConcepts] = useState([])
   const [completedActions, setCompletedActions] = useState([])
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth > 760)
   const [toast, setToast] = useState('')
   const [serverState, setServerState] = useState(null)
   const [serverOnline, setServerOnline] = useState(false)
@@ -122,14 +148,36 @@ function App() {
   }
 
   const handleAddCandidate = async (trend) => {
+    const currentAccounts = serverState?.accounts?.length ? serverState.accounts : managedAccounts
+    const localCandidate = createLocalCandidate(trend, currentAccounts)
     try {
       const next = await addCandidate(trend)
       setServerState(next)
       setServerOnline(true)
-      showToast('已收录到候选内容池，等待分析')
+      showToast(`已自动归入「${next.candidatePool?.find((item) => item.postId === trend.id || item.id === trend.id)?.accountName || '对应账号'}」候选池`)
     } catch {
-      showToast('候选内容已在当前页面标记，API 服务未连接')
+      setServerState((current) => ({
+        ...(current || { accounts: currentAccounts, trends, assets: [], activity: [], completedActions: [] }),
+        candidatePool: [localCandidate, ...((current?.candidatePool || []).filter((item) => item.postId !== trend.id && item.id !== localCandidate.id))],
+      }))
+      showToast(`已自动归入「${localCandidate.accountName}」候选池（本地演示）`)
     }
+  }
+
+  const handleCaptureKeywords = async (payload) => {
+    try { const next = await captureKeywords(payload); setServerState(next); setServerOnline(true); showToast(`关键词抓取完成，共 ${next.captureBatches?.[0]?.count || 0} 条`) } catch (error) { showToast(error.message || '关键词抓取失败') }
+  }
+
+  const handleAddBenchmarkAccount = async (payload) => {
+    try { const next = await addBenchmarkAccountRequest(payload); setServerState(next); setServerOnline(true); showToast(`已收录对标账号：${payload.username}`) } catch (error) { showToast(error.message || '对标账号收录失败') }
+  }
+
+  const handleCaptureBenchmarkAccount = async (accountId) => {
+    try { const next = await captureBenchmarkAccount(accountId); setServerState(next); setServerOnline(true); showToast(`对标账号抓取完成，共 ${next.captureBatches?.[0]?.count || 0} 条`) } catch (error) { showToast(error.message || '对标账号抓取失败') }
+  }
+
+  const handleCollectCapturedPost = async (postId) => {
+    try { const next = await collectCapturedPost(postId); setServerState(next); setServerOnline(true); showToast('抓取内容已进入候选收录池') } catch (error) { showToast(error.message || '内容收录失败') }
   }
 
   const handleGenerateRemix = async (forceModel = false) => {
@@ -148,14 +196,19 @@ function App() {
   }
 
   const handleCandidateStatus = async (id, status) => {
+    const normalizedStatus = { '待分析': '待拆解', '已进入拆解': '拆解中', '已忽略': '已归档' }[status] || status
     try {
-      const next = await updateCandidate(id, status)
+      const next = await updateCandidate(id, normalizedStatus)
       setServerState(next)
       setServerOnline(true)
-      showToast(`候选内容已更新为：${status}`)
+      showToast(`候选内容已更新为：${normalizedStatus}`)
     } catch (error) {
       showToast(error.message || '候选内容状态更新失败')
     }
+  }
+
+  const handleAssignCandidate = async (id, accountId) => {
+    try { const next = await assignCandidateRequest(id, accountId); setServerState(next); setServerOnline(true); showToast('候选内容已归属到账号候选池') } catch (error) { showToast(error.message || '候选内容分配失败') }
   }
 
   const handleGenerateDailyReport = async () => {
@@ -226,6 +279,26 @@ function App() {
     } catch (error) {
       showToast(error.message || '进入审核队列失败')
     }
+  }
+
+  const handleCreateContentAsset = async (payload) => {
+    try { const next = await saveAssetRequest(payload); setServerState(next); setServerOnline(true); showToast('内容资产已创建，进入待审核') } catch (error) { showToast(error.message || '创建内容资产失败') }
+  }
+
+  const handleTransitionAsset = async (id, status) => {
+    try { const next = await transitionAssetRequest(id, status); setServerState(next); setServerOnline(true); showToast(`资产已更新为：${status}`) } catch (error) { showToast(error.message || '资产状态更新失败') }
+  }
+
+  const handlePrepareAsset = async (id, input) => {
+    try { const next = await prepareAssetForPublishRequest(id, input); setServerState(next); setServerOnline(true); showToast('发布准备已保存') } catch (error) { showToast(error.message || '发布准备保存失败') }
+  }
+
+  const handleRecordPublishedPerformance = async (id, metrics) => {
+    try { const next = await recordPublishedPerformanceRequest(id, metrics); setServerState(next); setServerOnline(true); showToast('真实发布数据已回流，复盘结论已生成') } catch (error) { showToast(error.message || '发布数据保存失败') }
+  }
+
+  const handleReviewKnowledgeRule = async (candidateId, review) => {
+    try { const next = await reviewKnowledgeRule(candidateId, review); setServerState(next); setServerOnline(true); showToast(`规则审核已保存：${review.status}`) } catch (error) { showToast(error.message || '规则审核保存失败') }
   }
 
   const handleRunMonitor = async () => {
@@ -339,9 +412,10 @@ function App() {
 
         <div className="page-wrap">
           {activeModule === 'dashboard' && <Dashboard language={language} accounts={serverState?.accounts} candidateCount={serverState?.candidatePool?.length || 0} assets={serverState?.assets} leaderTasks={serverState?.leaderTasks} activity={serverState?.activity} onOpenAccount={openAccountCockpit} onDemoAction={showToast} />}
-          {activeModule === 'intelligence' && <Intelligence language={language} trends={liveTrends} selectedTrend={selectedTrend} onSelectTrend={openTrend} onOpenRemix={openRemix} onAddCandidate={handleAddCandidate} onCandidateStatus={handleCandidateStatus} candidatePool={serverState?.candidatePool} candidateCount={serverState?.candidatePool?.length || 0} onRefresh={handleRunMonitor} syncing={syncing} managedAccounts={serverState?.accounts} focusedAccountId={focusedAccountId} leaderTasks={serverState?.leaderTasks} dailyReports={serverState?.dailyReports} benchmarkStrategies={serverState?.benchmarkStrategies} onGenerateReport={handleGenerateDailyReport} onCreateLeaderTask={handleCreateLeaderTask} onCompleteLeaderTask={handleCompleteLeaderTask} onPromoteStrategy={handlePromoteStrategy} />}
-          {activeModule === 'remix' && <Remix language={language} trend={selectedTrend} activeConceptId={activeConceptId} draft={draft} savedConcepts={savedConcepts} generated={remixResult} generating={remixGenerating} onGenerate={handleGenerateRemix} onSelectConcept={selectConcept} onDraftChange={setDraft} onSave={saveConcept} onOpenDistribution={() => setActiveModule('distribution')} />}
+          {activeModule === 'intelligence' && <><CaptureWorkbench state={serverState} candidateCount={serverState?.candidatePool?.length || 0} onCaptureKeywords={handleCaptureKeywords} onAddAccount={handleAddBenchmarkAccount} onCaptureAccount={handleCaptureBenchmarkAccount} onCollectPost={handleCollectCapturedPost} onOpenPost={(url) => window.open(url, '_blank', 'noopener,noreferrer')} /><Intelligence language={language} trends={liveTrends} selectedTrend={selectedTrend} onSelectTrend={openTrend} onOpenRemix={openRemix} onAddCandidate={handleAddCandidate} onCandidateStatus={handleCandidateStatus} onAssignCandidate={handleAssignCandidate} candidatePool={serverState?.candidatePool} candidateCount={serverState?.candidatePool?.length || 0} onRefresh={handleRunMonitor} syncing={syncing} managedAccounts={serverState?.accounts} focusedAccountId={focusedAccountId} leaderTasks={serverState?.leaderTasks} dailyReports={serverState?.dailyReports} benchmarkStrategies={serverState?.benchmarkStrategies} onGenerateReport={handleGenerateDailyReport} onCreateLeaderTask={handleCreateLeaderTask} onCompleteLeaderTask={handleCompleteLeaderTask} onPromoteStrategy={handlePromoteStrategy} /></>}
+          {activeModule === 'remix' && <Remix language={language} trend={selectedTrend} activeConceptId={activeConceptId} draft={draft} savedConcepts={savedConcepts} generated={remixResult} generating={remixGenerating} candidates={serverState?.candidatePool || []} onReviewKnowledgeRule={handleReviewKnowledgeRule} onToast={showToast} onGenerate={handleGenerateRemix} onSelectConcept={selectConcept} onDraftChange={setDraft} onSave={saveConcept} onOpenDistribution={() => setActiveModule('distribution')} />}
           {activeModule === 'distribution' && <Distribution language={language} trend={selectedTrend} draft={draft} completedActions={completedActions} onComplete={completeAction} onQueueReview={handleQueueReview} onOpenRemix={() => setActiveModule('remix')} activity={serverState?.activity} />}
+          {activeModule === 'assets' && <Assets assets={serverState?.assets || []} candidates={serverState?.candidatePool || []} accounts={serverState?.accounts || []} onCreate={handleCreateContentAsset} onPrepare={handlePrepareAsset} onTransition={handleTransitionAsset} onPerformance={handleRecordPublishedPerformance} onToast={showToast} />}
         </div>
       </main>
 
