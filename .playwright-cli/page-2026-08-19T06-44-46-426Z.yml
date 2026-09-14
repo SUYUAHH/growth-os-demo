@@ -1,0 +1,244 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e10]:
+        - strong [ref=e11]: GROWTH OS
+        - generic [ref=e12]: AI CONTENT OPERATIONS
+      - button "收起侧栏" [ref=e13] [cursor=pointer]
+    - generic [ref=e17]: 工作区
+    - generic [ref=e18]:
+      - generic [ref=e19]: LL
+      - generic [ref=e20]:
+        - strong [ref=e21]: Lumen Life Journal
+        - generic [ref=e22]: "@lumenlifejournal"
+    - navigation "主导航" [ref=e25]:
+      - generic [ref=e26]: 功能模块
+      - button "总仪表盘 全局 · 账号 · 预警" [ref=e344] [cursor=pointer]:
+        - generic [ref=e34]:
+          - strong [ref=e35]: 总仪表盘
+          - generic [ref=e36]: 全局 · 账号 · 预警
+      - button "增长情报 热点 · 复盘 · 对标" [ref=e345] [cursor=pointer]:
+        - generic [ref=e42]:
+          - strong [ref=e43]: 增长情报
+          - generic [ref=e44]: 热点 · 复盘 · 对标
+      - button "爆款拆解 结构 · 选题 · 二创" [ref=e346] [cursor=pointer]:
+        - generic [ref=e50]:
+          - strong [ref=e51]: 爆款拆解
+          - generic [ref=e52]: 结构 · 选题 · 二创
+      - button "分发优化 发布 · 健康 · 复盘" [ref=e347] [cursor=pointer]:
+        - generic [ref=e58]:
+          - strong [ref=e59]: 分发优化
+          - generic [ref=e60]: 发布 · 健康 · 复盘
+    - generic "界面语言" [ref=e348]:
+      - generic [ref=e62]:
+        - generic [ref=e67]: 界面语言
+        - generic [ref=e68]: 一键翻译为中文
+      - group "切换界面语言" [ref=e349]:
+        - button "原始" [ref=e350] [cursor=pointer]
+        - button "中文" [active] [pressed] [ref=e71] [cursor=pointer]
+    - generic [ref=e76]:
+      - strong [ref=e77]: 3 个 Agent 已就绪
+      - generic [ref=e78]: 数据同步于 09:42
+    - generic [ref=e82]:
+      - generic [ref=e83]: 演示环境
+      - generic [ref=e84]: v0.1.0
+  - main [ref=e85]:
+    - generic [ref=e86]:
+      - generic [ref=e88]:
+        - generic [ref=e89]: 工作区
+        - strong [ref=e92]: 总仪表盘
+      - generic [ref=e93]:
+        - button "监测已关闭 · DEMO" [ref=e351] [cursor=pointer]
+        - button "通知" [ref=e352] [cursor=pointer]
+        - generic [ref=e100]:
+          - generic [ref=e101]: SY
+          - generic [ref=e102]: 运营人员
+    - generic [ref=e106]:
+      - generic [ref=e107]:
+        - generic [ref=e108]:
+          - generic [ref=e109]:
+            - generic [ref=e110]: EXECUTIVE OVERVIEW
+            - heading "全部账号，今天发生了什么？" [level=1] [ref=e117]
+            - paragraph [ref=e118]: 跨账号看增长、内容与风险；需要具体处理时，再下钻进入增长情报驾驶舱。
+          - generic [ref=e119]:
+            - button "添加账号" [ref=e120] [cursor=pointer]
+            - button "连接 X" [ref=e123] [cursor=pointer]
+        - generic [ref=e128]:
+          - generic [ref=e129]:
+            - generic [ref=e130]: 管理账号
+            - strong [ref=e131]: "03"
+            - generic [ref=e132]: 1 已连接
+          - generic [ref=e133]:
+            - generic [ref=e134]: 总曝光
+            - strong [ref=e135]: 1.84M
+            - generic [ref=e136]: +18.6% vs. last week
+          - generic [ref=e137]:
+            - generic [ref=e138]: 平均点赞率
+            - strong [ref=e139]: 5.7%
+            - generic [ref=e140]: +0.8pt
+          - generic [ref=e141]:
+            - generic [ref=e142]: 平均互动率
+            - strong [ref=e143]: 6.8%
+            - generic [ref=e144]: 评论 / 收藏综合
+          - generic [ref=e145]:
+            - generic [ref=e146]: 待处理
+            - strong [ref=e147]: "01"
+            - generic [ref=e148]: 风险 / Leader 任务
+        - generic [ref=e149]:
+          - generic [ref=e150]:
+            - generic [ref=e151]:
+              - generic [ref=e152]:
+                - generic [ref=e153]: 01 · PORTFOLIO TREND
+                - heading "近 7 日账号组合表现" [level=2] [ref=e154]
+                - paragraph [ref=e155]: 曝光与互动趋势用于判断整体经营是否健康。
+              - generic [ref=e156]: 7 days
+            - generic [ref=e157]:
+              - img "近 7 日趋势" [ref=e158]
+              - generic [ref=e160]:
+                - generic [ref=e161]: Mon
+                - generic [ref=e162]: Tue
+                - generic [ref=e163]: Wed
+                - generic [ref=e164]: Thu
+                - generic [ref=e165]: Fri
+                - generic [ref=e166]: Sat
+                - generic [ref=e167]: Sun
+            - generic [ref=e168]:
+              - generic [ref=e169]: 曝光趋势
+              - generic [ref=e171]: 互动趋势
+              - strong [ref=e173]: 组合健康度 76/100
+          - generic [ref=e174]:
+            - generic [ref=e176]:
+              - generic [ref=e177]: 02 · CONTENT FUNNEL
+              - heading "内容经营漏斗" [level=2] [ref=e178]
+              - paragraph [ref=e179]: 从机会发现到进入审核的转化。
+            - generic [ref=e180]:
+              - generic [ref=e181]:
+                - generic [ref=e182]: 热点发现
+                - generic [ref=e183]: "12"
+              - generic [ref=e184]:
+                - generic [ref=e185]: 候选内容
+                - generic [ref=e186]: "00"
+              - generic [ref=e187]:
+                - generic [ref=e188]: 内容资产
+                - generic [ref=e189]: "02"
+              - generic [ref=e190]:
+                - generic [ref=e191]: 待审核
+                - generic [ref=e192]: "02"
+        - generic [ref=e193]:
+          - generic [ref=e194]:
+            - generic [ref=e195]:
+              - generic [ref=e196]: 03 · ACCOUNT MANAGEMENT
+              - heading "账号数据看板" [level=2] [ref=e197]
+              - paragraph [ref=e198]: 连接状态仅用于 Demo 展示；点击账号进入对应的经营驾驶舱。
+            - generic [ref=e199]:
+              - combobox "账号分类筛选" [ref=e200]:
+                - option "全部" [selected]
+                - option "生活方式"
+                - option "美食餐饮"
+                - option "旅行户外"
+              - button "全部" [ref=e201] [cursor=pointer]
+              - button "已连接" [ref=e202] [cursor=pointer]
+              - button "待授权" [ref=e203] [cursor=pointer]
+              - button "数据异常" [ref=e204] [cursor=pointer]
+          - generic [ref=e205]:
+            - generic [ref=e206]:
+              - generic [ref=e207]: 账号
+              - generic [ref=e208]: 分类
+              - generic [ref=e209]: 曝光
+              - generic [ref=e210]: 点赞率
+              - generic [ref=e211]: 互动率
+              - generic [ref=e212]: 近 7 日发帖
+              - generic [ref=e213]: 连接状态
+            - button "LA Lumen Life Journal @lumenlifejournal 生活方式 842K 6.4% 7.8% 05 已连接" [ref=e214] [cursor=pointer]:
+              - generic [ref=e215]:
+                - generic [ref=e216]: LA
+                - generic [ref=e217]:
+                  - strong [ref=e218]: Lumen Life Journal
+                  - generic [ref=e219]: "@lumenlifejournal"
+              - generic [ref=e220]: 生活方式
+              - generic [ref=e222]: 842K
+              - generic [ref=e223]: 6.4%
+              - generic [ref=e224]: 7.8%
+              - generic [ref=e225]: "05"
+              - generic [ref=e226]: 已连接
+            - button "NE NOVA Food Stories @novafoodstories 美食餐饮 516K 4.2% 4.9% 03 数据异常" [ref=e231] [cursor=pointer]:
+              - generic [ref=e232]:
+                - generic [ref=e233]: NE
+                - generic [ref=e234]:
+                  - strong [ref=e235]: NOVA Food Stories
+                  - generic [ref=e236]: "@novafoodstories"
+              - generic [ref=e237]: 美食餐饮
+              - generic [ref=e239]: 516K
+              - generic [ref=e240]: 4.2%
+              - generic [ref=e241]: 4.9%
+              - generic [ref=e242]: "03"
+              - generic [ref=e243]: 数据异常
+            - button "AD Atlas Weekend Club @atlasweekendclub 旅行户外 482K 6.5% 7.7% 04 待授权" [ref=e248] [cursor=pointer]:
+              - generic [ref=e249]:
+                - generic [ref=e250]: AD
+                - generic [ref=e251]:
+                  - strong [ref=e252]: Atlas Weekend Club
+                  - generic [ref=e253]: "@atlasweekendclub"
+              - generic [ref=e254]: 旅行户外
+              - generic [ref=e256]: 482K
+              - generic [ref=e257]: 6.5%
+              - generic [ref=e258]: 7.7%
+              - generic [ref=e259]: "04"
+              - generic [ref=e260]: 待授权
+        - generic [ref=e265]:
+          - generic [ref=e266]:
+            - generic [ref=e268]:
+              - generic [ref=e269]: 04 · HEALTH DISTRIBUTION
+              - heading "账号健康分布" [level=2] [ref=e270]
+            - generic [ref=e272]:
+              - strong [ref=e273]: "76"
+              - generic [ref=e274]: /100
+            - generic [ref=e275]:
+              - generic [ref=e276]: 健康 1
+              - generic [ref=e278]: 关注 1
+              - generic [ref=e280]: 风险 1
+          - generic [ref=e282]:
+            - generic [ref=e284]:
+              - generic [ref=e285]: 05 · PRIORITY SUMMARY
+              - heading "今天的经营判断" [level=2] [ref=e286]
+            - generic [ref=e290]:
+              - strong [ref=e291]: NOVA Food Stories
+              - text: 的互动与评论意图需要优先处理。
+            - generic [ref=e297]:
+              - strong [ref=e298]: 0 项 Leader 任务
+              - text: 等待负责人执行与下次日报验证。
+            - generic [ref=e303]:
+              - strong [ref=e304]: 0 条候选内容
+              - text: 可进入爆款拆解和二创。
+      - complementary [ref=e305]:
+        - button "收起经营侧栏" [ref=e306] [cursor=pointer]
+        - generic [ref=e309]:
+          - generic [ref=e310]: OPERATING RAIL
+          - heading "需要处理" [level=3] [ref=e311]
+          - button "1 个高优风险 NOVA Food Stories" [ref=e312] [cursor=pointer]:
+            - generic [ref=e315]:
+              - strong [ref=e316]: 1 个高优风险
+              - generic [ref=e317]: NOVA Food Stories
+          - button "0 项 Leader 待办 0 项今日到期" [ref=e318] [cursor=pointer]:
+            - generic [ref=e323]:
+              - strong [ref=e324]: 0 项 Leader 待办
+              - generic [ref=e325]: 0 项今日到期
+          - button "2 条审核队列 等待人工确认" [ref=e326] [cursor=pointer]:
+            - generic [ref=e331]:
+              - strong [ref=e332]: 2 条审核队列
+              - generic [ref=e333]: 等待人工确认
+          - generic [ref=e334]:
+            - generic [ref=e335]: RECENT ACTIVITY
+            - paragraph [ref=e336]:
+              - time [ref=e337]: 09:59
+              - text: 本地事件流新增 1 条可分析信号
+            - paragraph [ref=e338]:
+              - time [ref=e339]: 09:58
+              - text: 本地事件流新增 1 条可分析信号
+            - paragraph [ref=e340]:
+              - time [ref=e341]: 10:29
+              - text: 本地事件流新增 1 条可分析信号
+            - paragraph [ref=e342]:
+              - time [ref=e343]: 10:28
+              - text: 本地事件流新增 1 条可分析信号
+  - generic [ref=e353]: 界面已切换为中文

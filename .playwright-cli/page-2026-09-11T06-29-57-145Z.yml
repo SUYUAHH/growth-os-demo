@@ -1,0 +1,404 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e10]:
+        - strong [ref=e11]: GROWTH OS
+        - generic [ref=e12]: AI CONTENT OPERATIONS
+      - button "收起侧栏" [ref=e13] [cursor=pointer]
+    - generic [ref=e17]: WORKSPACE
+    - generic [ref=e18]:
+      - generic [ref=e19]: LL
+      - generic [ref=e20]:
+        - strong [ref=e21]: Lumen Life Journal
+        - generic [ref=e22]: "@lumenlifejournal"
+    - navigation "主导航" [ref=e25]:
+      - generic [ref=e26]: OPERATIONS
+      - button "Overview Portfolio · Risk · Alerts" [ref=e27] [cursor=pointer]:
+        - generic [ref=e34]:
+          - strong [ref=e35]: Overview
+          - generic [ref=e36]: Portfolio · Risk · Alerts
+      - button "Growth Intelligence Signals · Review · Benchmarks" [ref=e38] [cursor=pointer]:
+        - generic [ref=e42]:
+          - strong [ref=e43]: Growth Intelligence
+          - generic [ref=e44]: Signals · Review · Benchmarks
+      - button "Viral Remix Structure · Concepts · Draft" [ref=e45] [cursor=pointer]:
+        - generic [ref=e50]:
+          - strong [ref=e51]: Viral Remix
+          - generic [ref=e52]: Structure · Concepts · Draft
+      - button "Distribution Publish · Health · Review" [ref=e53] [cursor=pointer]:
+        - generic [ref=e58]:
+          - strong [ref=e59]: Distribution
+          - generic [ref=e60]: Publish · Health · Review
+      - button "Content Assets Review · Media · Queue" [ref=e61] [cursor=pointer]:
+        - generic [ref=e66]:
+          - strong [ref=e67]: Content Assets
+          - generic [ref=e68]: Review · Media · Queue
+    - generic "Language" [ref=e69]:
+      - generic [ref=e70]:
+        - generic [ref=e75]: Language
+        - generic [ref=e76]: EN
+      - group "Switch interface language" [ref=e77]:
+        - button "Original" [pressed] [ref=e78] [cursor=pointer]
+        - button "中文" [ref=e79] [cursor=pointer]
+    - generic [ref=e84]:
+      - strong [ref=e85]: 3 Agents ready
+      - generic [ref=e86]: Data synced 09:42
+    - generic [ref=e90]:
+      - generic [ref=e91]: DEMO ENVIRONMENT
+      - generic [ref=e92]: v0.1.0
+  - main [ref=e93]:
+    - generic [ref=e94]:
+      - generic [ref=e96]:
+        - generic [ref=e97]: WORKSPACE
+        - strong [ref=e100]: Overview
+      - generic [ref=e101]:
+        - button "MONITOR OFF · DEMO" [ref=e102] [cursor=pointer]
+        - button "Notifications" [ref=e104] [cursor=pointer]
+        - generic [ref=e108]:
+          - generic [ref=e109]: SY
+          - generic [ref=e110]: Operator
+    - generic [ref=e114]:
+      - generic [ref=e115]:
+        - generic [ref=e116]:
+          - generic [ref=e117]:
+            - generic [ref=e118]: EXECUTIVE OVERVIEW
+            - heading "全部账号，今天发生了什么？" [level=1] [ref=e125]
+            - paragraph [ref=e126]: 跨账号看增长、内容与风险；需要具体处理时，再下钻进入增长情报驾驶舱。
+          - generic [ref=e127]:
+            - button "添加账号" [ref=e128] [cursor=pointer]
+            - button "连接 X" [ref=e131] [cursor=pointer]
+        - generic [ref=e136]:
+          - generic [ref=e137]:
+            - generic [ref=e138]: 管理账号
+            - strong [ref=e139]: "03"
+            - generic [ref=e140]: 1 已连接
+          - generic [ref=e141]:
+            - generic [ref=e142]: 总曝光
+            - strong [ref=e143]: 1.84M
+            - generic [ref=e144]: +18.6% vs. last week
+          - generic [ref=e145]:
+            - generic [ref=e146]: 平均点赞率
+            - strong [ref=e147]: 5.7%
+            - generic [ref=e148]: +0.8pt
+          - generic [ref=e149]:
+            - generic [ref=e150]: 平均互动率
+            - strong [ref=e151]: 6.8%
+            - generic [ref=e152]: 评论 / 收藏综合
+          - generic [ref=e153]:
+            - generic [ref=e154]: 待处理
+            - strong [ref=e155]: "01"
+            - generic [ref=e156]: 风险 / Leader 任务
+        - generic [ref=e157]:
+          - generic [ref=e158]:
+            - generic [ref=e159]:
+              - generic [ref=e160]: CONTENT GROWTH OUTCOME
+              - heading "内容增长结果验证" [level=2] [ref=e164]
+              - paragraph [ref=e165]: 这是内容运营的结果层，不单独替代产品生命周期系统：用访问、注册和首次激活验证内容质量。
+            - generic [ref=e166]: Demo 演示数据
+          - generic [ref=e167]:
+            - generic [ref=e169]:
+              - generic [ref=e170]: 内容触达 / 访问
+              - strong [ref=e171]: 12.8K
+            - generic [ref=e174]:
+              - generic [ref=e175]:
+                - generic [ref=e176]: 注册
+                - strong [ref=e177]: 2.2K
+              - generic [ref=e180]: 环比转化 17.1%
+            - generic [ref=e181]:
+              - generic [ref=e182]:
+                - generic [ref=e183]: 首次激活
+                - strong [ref=e184]: 1.0K
+              - generic [ref=e187]: 环比转化 47.5%
+            - generic [ref=e188]:
+              - generic [ref=e189]:
+                - generic [ref=e190]: D7 留存
+                - strong [ref=e191]: "386"
+              - generic [ref=e194]: 环比转化 37.1%
+            - generic [ref=e195]:
+              - generic [ref=e196]:
+                - generic [ref=e197]: 付费
+                - strong [ref=e198]: "92"
+              - generic [ref=e201]: 环比转化 0.7%
+          - generic [ref=e207]:
+            - text: 当前主要瓶颈：
+            - strong [ref=e208]: 留存
+            - text: 。建议把下一轮内容 CTA 从“关注”改成“完成首次体验”，并用埋点验证。
+        - generic [ref=e212]:
+          - generic [ref=e213]:
+            - generic [ref=e215]:
+              - generic [ref=e216]: MARKET PLAYBOOK
+              - heading "海外市场策略" [level=2] [ref=e222]
+              - paragraph [ref=e223]: 同一个 AI 产品，在不同市场需要不同的内容角度、渠道和激活动作。
+            - generic [ref=e224]:
+              - article [ref=e225]:
+                - generic [ref=e226]:
+                  - strong [ref=e227]: 北美
+                  - generic [ref=e228]: X · Reddit · TikTok
+                - paragraph [ref=e229]: 效率、真实案例、明确观点
+                - generic [ref=e230]: 合规重点：广告披露、隐私和效果声明
+                - emphasis [ref=e231]: 激活动作：免费体验后完成第一个 AI 工作流
+              - article [ref=e232]:
+                - generic [ref=e233]:
+                  - strong [ref=e234]: 欧洲
+                  - generic [ref=e235]: LinkedIn · X · YouTube
+                - paragraph [ref=e236]: 可信度、隐私、安全与专业解释
+                - generic [ref=e237]: 合规重点：GDPR、广告披露、版权
+                - emphasis [ref=e238]: 激活动作：行业模板与数据处理说明
+              - article [ref=e239]:
+                - generic [ref=e240]:
+                  - strong [ref=e241]: 东南亚
+                  - generic [ref=e242]: TikTok · Instagram · Facebook Group
+                - paragraph [ref=e243]: 低门槛教程、场景演示、社区口碑
+                - generic [ref=e244]: 合规重点：本地语言、促销表述、支付预期
+                - emphasis [ref=e245]: 激活动作：移动端快速上手与邀请奖励
+              - article [ref=e246]:
+                - generic [ref=e247]:
+                  - strong [ref=e248]: 日韩
+                  - generic [ref=e249]: X · YouTube · Instagram
+                - paragraph [ref=e250]: 细节、审美、可信赖的产品教育
+                - generic [ref=e251]: 合规重点：本地化表达、肖像/音乐版权、夸大宣传
+                - emphasis [ref=e252]: 激活动作：高完成度案例与客服指引
+          - generic [ref=e253]:
+            - generic [ref=e254]:
+              - generic [ref=e255]:
+                - generic [ref=e256]: KOL ECOSYSTEM
+                - heading "海外 KOL 合作池" [level=2] [ref=e262]
+                - paragraph [ref=e263]: 从收录账号升级为可评估、可合作、可复盘的圈层资产。
+              - generic [ref=e264]: 4 个
+            - generic [ref=e269]:
+              - generic [ref=e270]:
+                - generic [ref=e271]: "1"
+                - text: 已合作
+              - generic [ref=e272]:
+                - generic [ref=e273]: "1"
+                - text: 待沟通
+              - generic [ref=e274]:
+                - generic [ref=e275]: "1"
+                - text: 内容共创
+              - generic [ref=e276]:
+                - generic [ref=e277]: "1"
+                - text: 评估中
+            - generic [ref=e278]:
+              - generic [ref=e279]:
+                - generic [ref=e280]: AI
+                - generic [ref=e281]:
+                  - strong [ref=e282]: AI Finance Brief
+                  - generic [ref=e283]: 北美 · 腰部 · 182,000 粉丝
+                - generic [ref=e284]:
+                  - text: 产品教育与注册
+                  - generic [ref=e285]: 已合作
+              - generic [ref=e286]:
+                - generic [ref=e287]: Fu
+                - generic [ref=e288]:
+                  - strong [ref=e289]: Future of Work Club
+                  - generic [ref=e290]: 欧洲 · 社区节点 · 64,000 粉丝
+                - generic [ref=e291]:
+                  - text: 行业信任与试用
+                  - generic [ref=e292]: 待沟通
+              - generic [ref=e293]:
+                - generic [ref=e294]: Bu
+                - generic [ref=e295]:
+                  - strong [ref=e296]: Build with AI SEA
+                  - generic [ref=e297]: 东南亚 · 长尾 · 38,000 粉丝
+                - generic [ref=e298]:
+                  - text: 教程裂变与激活
+                  - generic [ref=e299]: 内容共创
+              - generic [ref=e300]:
+                - generic [ref=e301]: AI
+                - generic [ref=e302]:
+                  - strong [ref=e303]: AI Product Notes JP
+                  - generic [ref=e304]: 日韩 · 腰部 · 97,000 粉丝
+                - generic [ref=e305]:
+                  - text: 本地化产品教育
+                  - generic [ref=e306]: 评估中
+        - generic [ref=e307]:
+          - generic [ref=e308]:
+            - generic [ref=e310]:
+              - generic [ref=e311]: CONTENT ATTRIBUTION
+              - heading "内容到产品增长归因" [level=2] [ref=e315]
+              - paragraph [ref=e316]: 用 UTM 和产品埋点连接内容曝光、注册、激活和付费；当前仅展示内容端真实可得指标。
+            - generic [ref=e317]:
+              - generic [ref=e318]:
+                - strong [ref=e319]: The 15-minute dinner people keep making
+                - generic [ref=e320]: 未标注市场 · X
+                - generic [ref=e321]: 0 曝光 · —% 互动
+                - generic [ref=e322]: 待接产品埋点
+              - generic [ref=e323]:
+                - strong [ref=e324]: A small ritual for a loud day
+                - generic [ref=e325]: 未标注市场 · TikTok
+                - generic [ref=e326]: 0 曝光 · —% 互动
+                - generic [ref=e327]: 待接产品埋点
+              - generic [ref=e328]:
+                - strong [ref=e329]: The 15-minute dinner people keep making
+                - generic [ref=e330]: 未标注市场 · X
+                - generic [ref=e331]: 0 曝光 · —% 互动
+                - generic [ref=e332]: 待接产品埋点
+              - generic [ref=e333]:
+                - strong [ref=e334]: The AI tools that quietly changed how small teams ship every week.
+                - generic [ref=e335]: 未标注市场 · X
+                - generic [ref=e336]: 0 曝光 · —% 互动
+                - generic [ref=e337]: 待接产品埋点
+              - generic [ref=e338]:
+                - strong [ref=e339]: A practical breakdown of what the latest funding round means for AI infrastructure.
+                - generic [ref=e340]: 未标注市场 · X
+                - generic [ref=e341]: 0 曝光 · —% 互动
+                - generic [ref=e342]: 待接产品埋点
+              - generic [ref=e343]:
+                - strong [ref=e344]: The 15-minute dinner people keep making
+                - generic [ref=e345]: 未标注市场 · X
+                - generic [ref=e346]: 0 曝光 · —% 互动
+                - generic [ref=e347]: 待接产品埋点
+              - generic [ref=e348]:
+                - strong [ref=e349]: Smoke test
+                - generic [ref=e350]: 未标注市场 · 未知渠道
+                - generic [ref=e351]: 0 曝光 · —% 互动
+                - generic [ref=e352]: 待接产品埋点
+            - generic [ref=e353]: 注册、激活和付费数据需要产品埋点接入后计算
+          - generic [ref=e354]:
+            - generic [ref=e356]:
+              - generic [ref=e357]: AI EXPERIMENT CENTER
+              - heading "增长实验中心" [level=2] [ref=e360]
+              - paragraph [ref=e361]: 将复盘结论转成可验证的下一轮实验，不以单条爆款替代增长规律。
+            - generic [ref=e362]:
+              - strong [ref=e363]: 实验：北美 X 用户问题式钩子
+              - generic [ref=e364]: 假设：首句直接提出用户问题，能提升注册页点击率。
+              - generic [ref=e365]:
+                - generic [ref=e366]: 对照：判断式标题
+                - generic [ref=e367]: 实验：问题式标题
+              - generic [ref=e368]:
+                - generic [ref=e369]: 主指标：注册率
+                - generic [ref=e370]: 护栏：负面评论率
+                - generic [ref=e371]: 样本：3 条 / 7 天
+              - generic [ref=e372]: 状态：待执行
+            - generic [ref=e373]: 不在样本不足时提前下结论；不因转化提升牺牲合规、留存或用户信任。
+        - generic [ref=e376]:
+          - generic [ref=e377]:
+            - generic [ref=e378]:
+              - generic [ref=e379]:
+                - generic [ref=e380]: 01 · PORTFOLIO TREND
+                - heading "近 7 日账号组合表现" [level=2] [ref=e381]
+                - paragraph [ref=e382]: 曝光与互动趋势用于判断整体经营是否健康。
+              - generic [ref=e383]: 7 days
+            - generic [ref=e384]:
+              - img "近 7 日趋势" [ref=e385]
+              - generic [ref=e387]:
+                - generic [ref=e388]: Mon
+                - generic [ref=e389]: Tue
+                - generic [ref=e390]: Wed
+                - generic [ref=e391]: Thu
+                - generic [ref=e392]: Fri
+                - generic [ref=e393]: Sat
+                - generic [ref=e394]: Sun
+            - generic [ref=e395]:
+              - generic [ref=e396]: 曝光趋势
+              - generic [ref=e398]: 互动趋势
+              - strong [ref=e400]: 组合健康度 76/100
+          - generic [ref=e401]:
+            - generic [ref=e403]:
+              - generic [ref=e404]: 02 · CONTENT FUNNEL
+              - heading "内容经营漏斗" [level=2] [ref=e405]
+              - paragraph [ref=e406]: 从机会发现到进入审核的转化。
+            - generic [ref=e407]:
+              - generic [ref=e408]:
+                - generic [ref=e409]: 热点发现
+                - generic [ref=e410]: "12"
+              - generic [ref=e411]:
+                - generic [ref=e412]: 候选内容
+                - generic [ref=e413]: "03"
+              - generic [ref=e414]:
+                - generic [ref=e415]: 内容资产
+                - generic [ref=e416]: "07"
+              - generic [ref=e417]:
+                - generic [ref=e418]: 待审核
+                - generic [ref=e419]: "07"
+        - generic [ref=e420]:
+          - generic [ref=e421]:
+            - generic [ref=e422]:
+              - generic [ref=e423]: 03 · ACCOUNT MANAGEMENT
+              - heading "账号数据看板" [level=2] [ref=e424]
+              - paragraph [ref=e425]: 连接状态仅用于 Demo 展示；点击账号进入对应的经营驾驶舱。
+            - generic [ref=e426]:
+              - combobox "账号分类筛选" [ref=e427]:
+                - option "全部" [selected]
+                - option "生活方式"
+                - option "美食餐饮"
+                - option "旅行户外"
+              - button "全部" [ref=e428] [cursor=pointer]
+              - button "已连接" [ref=e429] [cursor=pointer]
+              - button "待授权" [ref=e430] [cursor=pointer]
+              - button "数据异常" [ref=e431] [cursor=pointer]
+          - generic [ref=e432]:
+            - generic [ref=e433]:
+              - generic [ref=e434]: 账号
+              - generic [ref=e435]: 分类
+              - generic [ref=e436]: 曝光
+              - generic [ref=e437]: 点赞率
+              - generic [ref=e438]: 互动率
+              - generic [ref=e439]: 近 7 日发帖
+              - generic [ref=e440]: 连接状态
+            - button "LA Lumen Life Journal @lumenlifejournal 生活方式 842K 6.4% 7.8% 05 已连接" [ref=e441] [cursor=pointer]:
+              - generic [ref=e442]:
+                - generic [ref=e443]: LA
+                - generic [ref=e444]:
+                  - strong [ref=e445]: Lumen Life Journal
+                  - generic [ref=e446]: "@lumenlifejournal"
+              - generic [ref=e447]: 生活方式
+              - generic [ref=e449]: 842K
+              - generic [ref=e450]: 6.4%
+              - generic [ref=e451]: 7.8%
+              - generic [ref=e452]: "05"
+              - generic [ref=e453]: 已连接
+            - button "NE NOVA Food Stories @novafoodstories 美食餐饮 516K 4.2% 4.9% 03 数据异常" [ref=e458] [cursor=pointer]:
+              - generic [ref=e459]:
+                - generic [ref=e460]: NE
+                - generic [ref=e461]:
+                  - strong [ref=e462]: NOVA Food Stories
+                  - generic [ref=e463]: "@novafoodstories"
+              - generic [ref=e464]: 美食餐饮
+              - generic [ref=e466]: 516K
+              - generic [ref=e467]: 4.2%
+              - generic [ref=e468]: 4.9%
+              - generic [ref=e469]: "03"
+              - generic [ref=e470]: 数据异常
+            - button "AD Atlas Weekend Club @atlasweekendclub 旅行户外 482K 6.5% 7.7% 04 待授权" [ref=e475] [cursor=pointer]:
+              - generic [ref=e476]:
+                - generic [ref=e477]: AD
+                - generic [ref=e478]:
+                  - strong [ref=e479]: Atlas Weekend Club
+                  - generic [ref=e480]: "@atlasweekendclub"
+              - generic [ref=e481]: 旅行户外
+              - generic [ref=e483]: 482K
+              - generic [ref=e484]: 6.5%
+              - generic [ref=e485]: 7.7%
+              - generic [ref=e486]: "04"
+              - generic [ref=e487]: 待授权
+        - generic [ref=e492]:
+          - generic [ref=e493]:
+            - generic [ref=e495]:
+              - generic [ref=e496]: 04 · HEALTH DISTRIBUTION
+              - heading "账号健康分布" [level=2] [ref=e497]
+            - generic [ref=e499]:
+              - strong [ref=e500]: "76"
+              - generic [ref=e501]: /100
+            - generic [ref=e502]:
+              - generic [ref=e503]: 健康 1
+              - generic [ref=e505]: 关注 1
+              - generic [ref=e507]: 风险 1
+          - generic [ref=e509]:
+            - generic [ref=e511]:
+              - generic [ref=e512]: 05 · PRIORITY SUMMARY
+              - heading "今天的经营判断" [level=2] [ref=e513]
+            - generic [ref=e517]:
+              - strong [ref=e518]: NOVA Food Stories
+              - text: 的互动与评论意图需要优先处理。
+            - generic [ref=e524]:
+              - strong [ref=e525]: 0 项 Leader 任务
+              - text: 等待负责人执行与下次日报验证。
+            - generic [ref=e530]:
+              - strong [ref=e531]: 3 条候选内容
+              - text: 可进入爆款拆解和二创。
+      - complementary [ref=e532]:
+        - button "收起经营侧栏" [ref=e533] [cursor=pointer]
+        - generic [ref=e536]:
+          - generic [ref=e539]: "1"
+          - generic [ref=e544]: "0"

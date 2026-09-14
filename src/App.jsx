@@ -19,6 +19,8 @@ import Remix from './modules/Remix'
 import Distribution from './modules/Distribution'
 import CaptureWorkbench from './components/CaptureWorkbench'
 import Assets from './modules/Assets'
+import Governance from './modules/Governance'
+import OperationsHub from './modules/OperationsHub'
 import { addBenchmarkAccount as addBenchmarkAccountRequest, addCandidate, assignCandidate as assignCandidateRequest, captureBenchmarkAccount, captureKeywords, collectCapturedPost, completeAction as completeActionRequest, completeLeaderTask as completeLeaderTaskRequest, createLeaderTask as createLeaderTaskRequest, generateDailyReport as generateDailyReportRequest, generateRemix, getState, prepareAssetForPublish as prepareAssetForPublishRequest, promoteBenchmarkStrategy, queueReview, recordPublishedPerformance as recordPublishedPerformanceRequest, reviewKnowledgeRule, runMonitor, saveAsset as saveAssetRequest, startMonitor, stopMonitor, transitionAsset as transitionAssetRequest, updateCandidate } from './lib/api'
 import { getInterfaceCopy, navLabels, uiText } from './lib/i18n'
 
@@ -271,7 +273,7 @@ function App() {
   const handleQueueReview = async () => {
     try {
       const concept = (remixResult?.concepts || concepts).find((item) => item.id === activeConceptId) || (remixResult?.concepts || concepts)[0]
-      const next = await queueReview({ assetId: activeConceptId, title: concept?.title, draft, trendId: selectedTrend.id, channel: 'TikTok', source: 'Viral Remix Studio' })
+        const next = await queueReview({ assetId: activeConceptId, title: concept?.title, draft, trendId: selectedTrend.id, channel: selectedTrend.platform || 'X', source: 'Viral Remix Studio' })
       setServerState(next)
       setServerOnline(true)
       setSavedConcepts((current) => current.includes(activeConceptId) ? current : [...current, activeConceptId])
@@ -416,6 +418,8 @@ function App() {
           {activeModule === 'remix' && <Remix language={language} trend={selectedTrend} activeConceptId={activeConceptId} draft={draft} savedConcepts={savedConcepts} generated={remixResult} generating={remixGenerating} candidates={serverState?.candidatePool || []} onReviewKnowledgeRule={handleReviewKnowledgeRule} onToast={showToast} onGenerate={handleGenerateRemix} onSelectConcept={selectConcept} onDraftChange={setDraft} onSave={saveConcept} onOpenDistribution={() => setActiveModule('distribution')} />}
           {activeModule === 'distribution' && <Distribution language={language} trend={selectedTrend} draft={draft} completedActions={completedActions} onComplete={completeAction} onQueueReview={handleQueueReview} onOpenRemix={() => setActiveModule('remix')} activity={serverState?.activity} />}
           {activeModule === 'assets' && <Assets assets={serverState?.assets || []} candidates={serverState?.candidatePool || []} accounts={serverState?.accounts || []} onCreate={handleCreateContentAsset} onPrepare={handlePrepareAsset} onTransition={handleTransitionAsset} onPerformance={handleRecordPublishedPerformance} onToast={showToast} />}
+          {activeModule === 'governance' && <Governance state={serverState || {}} />}
+          {['account-kol', 'market', 'experiments', 'tasks'].includes(activeModule) && <OperationsHub type={activeModule} accounts={serverState?.accounts || []} leaderTasks={serverState?.leaderTasks || []} candidateCount={serverState?.candidatePool?.length || 0} />}
         </div>
       </main>
 

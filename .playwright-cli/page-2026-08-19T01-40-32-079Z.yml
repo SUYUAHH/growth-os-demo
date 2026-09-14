@@ -1,0 +1,314 @@
+- generic [ref=f1e3]:
+  - complementary [ref=f1e4]:
+    - generic [ref=f1e5]:
+      - generic [ref=f1e10]:
+        - strong [ref=f1e11]: GROWTH OS
+        - generic [ref=f1e12]: AI CONTENT OPERATIONS
+      - button "收起侧栏" [ref=f1e13] [cursor=pointer]
+    - generic [ref=f1e17]: WORKSPACE
+    - generic [ref=f1e18]:
+      - generic [ref=f1e19]: LL
+      - generic [ref=f1e20]:
+        - strong [ref=f1e21]: Lumen Life Journal
+        - generic [ref=f1e22]: "@lumenlifejournal"
+    - navigation "主导航" [ref=f1e25]:
+      - generic [ref=f1e26]: OPERATIONS
+      - button "总仪表盘 全局 · 账号 · 预警" [ref=f1e27] [cursor=pointer]:
+        - generic [ref=f1e34]:
+          - strong [ref=f1e35]: 总仪表盘
+          - generic [ref=f1e36]: 全局 · 账号 · 预警
+      - button "增长情报 热点 · 复盘 · 对标" [active] [ref=f1e38] [cursor=pointer]:
+        - generic [ref=f1e42]:
+          - strong [ref=f1e43]: 增长情报
+          - generic [ref=f1e44]: 热点 · 复盘 · 对标
+      - button "爆款拆解 结构 · 选题 · 二创" [ref=f1e45] [cursor=pointer]:
+        - generic [ref=f1e50]:
+          - strong [ref=f1e51]: 爆款拆解
+          - generic [ref=f1e52]: 结构 · 选题 · 二创
+      - button "分发优化 发布 · 健康 · 复盘" [ref=f1e53] [cursor=pointer]:
+        - generic [ref=f1e58]:
+          - strong [ref=f1e59]: 分发优化
+          - generic [ref=f1e60]: 发布 · 健康 · 复盘
+    - generic [ref=f1e65]:
+      - strong [ref=f1e66]: 3 Agents ready
+      - generic [ref=f1e67]: Data synced 09:42
+    - generic [ref=f1e71]:
+      - generic [ref=f1e72]: DEMO ENVIRONMENT
+      - generic [ref=f1e73]: v0.1.0
+  - main [ref=f1e74]:
+    - generic [ref=f1e75]:
+      - generic [ref=f1e77]:
+        - generic [ref=f1e78]: WORKSPACE
+        - strong [ref=f1e81]: 增长情报
+      - generic [ref=f1e82]:
+        - button "MONITOR OFF · DEMO" [ref=f1e83] [cursor=pointer]
+        - button "通知" [ref=f1e85] [cursor=pointer]
+        - generic [ref=f1e89]:
+          - generic [ref=f1e90]: SY
+          - generic [ref=f1e91]: Operator
+    - generic [ref=f1e308]:
+      - generic [ref=f1e309]:
+        - generic [ref=f1e310]:
+          - generic [ref=f1e311]: GROWTH INTELLIGENCE · TASKS 02 / 03 / 04
+          - heading "把信号、诊断和策略，变成今天能执行的动作。" [level=1] [ref=f1e320]
+          - paragraph [ref=f1e321]: 热点 Agent 发现机会，多账号复盘 Agent 定位问题，对标 Agent 生成差异化策略；三者共享来源和人工决策记录。
+        - generic [ref=f1e322]:
+          - button "立即监测" [ref=f1e323] [cursor=pointer]
+          - generic [ref=f1e329]:
+            - text: Data mode
+            - strong [ref=f1e330]: LIVE DEMO
+      - generic [ref=f1e331]:
+        - generic [ref=f1e332]:
+          - generic [ref=f1e333]:
+            - generic [ref=f1e334]: TODAY COMMAND
+            - heading "今天先跟进 让工作日变舒服的小仪式，并完成 0 项待执行动作。" [level=2] [ref=f1e335]
+          - generic [ref=f1e336]:
+            - button "运营视角" [ref=f1e337] [cursor=pointer]
+            - button "Leader 视角" [ref=f1e338] [cursor=pointer]
+        - generic [ref=f1e339]:
+          - generic [ref=f1e340]:
+            - generic [ref=f1e341]: 新热点
+            - strong [ref=f1e342]: "01"
+            - generic [ref=f1e343]: 按相关度排序
+          - generic [ref=f1e344]:
+            - generic [ref=f1e345]: 候选内容
+            - strong [ref=f1e346]: "03"
+            - generic [ref=f1e347]: 等待分析
+          - generic [ref=f1e348]:
+            - generic [ref=f1e349]: 待执行
+            - strong [ref=f1e350]: "00"
+            - generic [ref=f1e351]: Leader 任务
+          - generic [ref=f1e352]:
+            - generic [ref=f1e353]: 对标机会
+            - strong [ref=f1e354]: "01"
+            - generic [ref=f1e355]: 可进入候选池
+      - generic [ref=f1e356]:
+        - generic [ref=f1e357]:
+          - generic [ref=f1e358]:
+            - generic [ref=f1e359]: 02 · HOTSPOT RADAR
+            - heading "热点候选池 Agent" [level=2] [ref=f1e360]
+            - paragraph [ref=f1e361]: 按账号垂类筛选海外兴趣热点，再判断值不值得跟进，最后沉淀为候选内容。
+          - generic [ref=f1e362]:
+            - button "全部热点" [ref=f1e364] [cursor=pointer]
+            - button "生活方式" [ref=f1e365] [cursor=pointer]
+            - button "美食餐饮" [ref=f1e366] [cursor=pointer]
+            - button "旅行户外" [ref=f1e367] [cursor=pointer]
+            - button "全部信号" [ref=f1e369] [cursor=pointer]
+            - button "高匹配" [ref=f1e370] [cursor=pointer]
+            - button "低竞争" [ref=f1e371] [cursor=pointer]
+        - generic [ref=f1e372]:
+          - button "01 The tiny rituals that make a weekday feel better TikTok Creative Center · 3h ago · 12.8M views 生活方式 趋势上升 低竞争 账号高匹配 88 FIT" [ref=f1e374] [cursor=pointer]:
+            - generic [ref=f1e375]: "01"
+            - generic [ref=f1e376]:
+              - generic [ref=f1e377]: The tiny rituals that make a weekday feel better
+              - generic [ref=f1e378]: TikTok Creative Center · 3h ago · 12.8M views
+              - generic [ref=f1e379]:
+                - generic [ref=f1e380]: 生活方式
+                - generic [ref=f1e381]: 趋势上升
+                - generic [ref=f1e382]: 低竞争
+                - generic [ref=f1e383]: 账号高匹配
+            - generic [ref=f1e384]:
+              - strong [ref=f1e385]: "88"
+              - generic [ref=f1e386]: FIT
+          - generic [ref=f1e390]:
+            - generic [ref=f1e391]:
+              - generic [ref=f1e392]: 建议跟进
+              - generic [ref=f1e393]: 生活方式 · TikTok Creative Center · 3h ago
+            - heading "让工作日变舒服的小仪式" [level=3] [ref=f1e394]
+            - paragraph [ref=f1e395]: The tiny rituals that make a weekday feel better
+            - generic [ref=f1e396]:
+              - generic [ref=f1e397]:
+                - generic [ref=f1e398]: Momentum
+                - strong [ref=f1e399]: 92/100
+              - generic [ref=f1e400]:
+                - generic [ref=f1e401]: Relevance
+                - strong [ref=f1e402]: 88/100
+              - generic [ref=f1e403]:
+                - generic [ref=f1e404]: Competition
+                - strong [ref=f1e405]: 中
+            - generic [ref=f1e406]:
+              - generic [ref=f1e413]:
+                - strong [ref=f1e414]: 为什么是现在？
+                - generic [ref=f1e415]: Agent reasoning · 3 signals
+              - paragraph [ref=f1e416]: 近 24 小时生活方式内容互动增长 164%，用户正在收藏可复制的小习惯。
+            - generic [ref=f1e417]:
+              - generic [ref=f1e418]:
+                - generic [ref=f1e419]: 账号缺口
+                - paragraph [ref=f1e420]: 账号需要把抽象的生活态度落到一个今天就能尝试的真实场景。
+              - generic [ref=f1e421]:
+                - generic [ref=f1e422]: 下一步动作
+                - paragraph [ref=f1e423]: 用一个具体日常仪式切入，讲清它如何让忙碌的一天少一点摩擦。
+            - generic [ref=f1e424]:
+              - button "收录候选池" [ref=f1e425] [cursor=pointer]
+              - button "进入爆款拆解" [ref=f1e430] [cursor=pointer]
+      - generic [ref=f1e437]:
+        - generic [ref=f1e438]:
+          - generic [ref=f1e439]:
+            - generic [ref=f1e440]:
+              - generic [ref=f1e441]: 03 · MULTI-ACCOUNT REVIEW
+              - heading "多账号复盘与 Leader 指导" [level=2] [ref=f1e442]
+              - paragraph [ref=f1e443]: 每个账号输出 1–3 个问题、证据、影响和可验证动作；日报自动汇总风险与进度。
+            - button "生成今日报告" [ref=f1e444] [cursor=pointer]
+          - generic [ref=f1e448]:
+            - button "LA Lumen Life Journal @lumenlifejournal 78" [ref=f1e449] [cursor=pointer]:
+              - generic [ref=f1e450]: LA
+              - generic [ref=f1e451]:
+                - strong [ref=f1e452]: Lumen Life Journal
+                - generic [ref=f1e453]: "@lumenlifejournal"
+              - generic [ref=f1e454]: "78"
+            - button "NE NOVA Food Stories @novafoodstories 66" [ref=f1e455] [cursor=pointer]:
+              - generic [ref=f1e456]: NE
+              - generic [ref=f1e457]:
+                - strong [ref=f1e458]: NOVA Food Stories
+                - generic [ref=f1e459]: "@novafoodstories"
+              - generic [ref=f1e460]: "66"
+            - button "AD Atlas Weekend Club @atlasweekendclub 84" [ref=f1e461] [cursor=pointer]:
+              - generic [ref=f1e462]: AD
+              - generic [ref=f1e463]:
+                - strong [ref=f1e464]: Atlas Weekend Club
+                - generic [ref=f1e465]: "@atlasweekendclub"
+              - generic [ref=f1e466]: "84"
+          - generic [ref=f1e467]:
+            - generic [ref=f1e468]:
+              - generic [ref=f1e469]: 稳步增长
+              - heading "Lumen Life Journal" [level=3] [ref=f1e470]
+              - paragraph [ref=f1e471]: TikTok · Instagram · X · 当前健康度 78/100
+            - button "把首要问题转为任务" [ref=f1e472] [cursor=pointer]
+          - article [ref=f1e477]:
+            - generic [ref=f1e478]:
+              - generic [ref=f1e479]: P1
+              - generic [ref=f1e480]: 内容表达
+            - strong [ref=f1e481]: Hook 前 3 秒留存偏低
+            - paragraph [ref=f1e482]: 证据：Hook 前 3 秒留存
+            - paragraph [ref=f1e483]: 影响：影响内容表现的稳定性和下一轮选题判断。
+            - paragraph [ref=f1e484]: 建议：连续测试 3 条“生活判断”开头，减少参数式开场。
+          - generic [ref=f1e485]:
+            - generic [ref=f1e486]:
+              - generic [ref=f1e487]: L
+              - generic [ref=f1e488]:
+                - strong [ref=f1e489]: Leader 指导提纲
+                - generic [ref=f1e490]: Lumen Life Journal · daily review
+            - list [ref=f1e491]:
+              - listitem [ref=f1e492]: 本周优先补足具体场景，不扩展新栏目。
+              - listitem [ref=f1e493]: 把“一个小仪式”做成 3 条连续实验，统一 CTA。
+              - listitem [ref=f1e494]: 周五复盘收藏率和评论中的自发尝试意图。
+          - generic [ref=f1e495]:
+            - generic [ref=f1e496]:
+              - generic [ref=f1e497]: STRUCTURED ACTIONS
+              - generic [ref=f1e498]: 1 items
+            - generic [ref=f1e499]:
+              - button [ref=f1e500] [cursor=pointer]
+              - generic [ref=f1e503]:
+                - strong [ref=f1e504]: 验证：Hook 前 3 秒留存偏低
+                - generic [ref=f1e505]: Content Ops · 截止 2026-08-21 · 验证 下次日报确认改善
+              - generic [ref=f1e506]: 已完成
+          - generic [ref=f1e507]:
+            - generic [ref=f1e508]:
+              - generic [ref=f1e509]: LATEST LEADER REPORT
+              - strong [ref=f1e510]: 整体评分 76/100
+              - paragraph [ref=f1e511]: 稳步改善，优先处理关键短板
+            - generic [ref=f1e512]:
+              - generic [ref=f1e513]: 高优问题 3
+              - generic [ref=f1e514]: 待完成任务 0
+              - generic [ref=f1e515]: 已完成 1
+        - generic [ref=f1e516]:
+          - generic [ref=f1e517]:
+            - generic [ref=f1e518]:
+              - generic [ref=f1e519]: 04 · BENCHMARK STRATEGY
+              - heading "对标账号学习与差异化策略" [level=2] [ref=f1e520]
+              - paragraph [ref=f1e521]: 学习机制而不是复制表达；高表达相似度策略必须人工改写，低风险策略可进入候选池。
+            - generic [ref=f1e522]: 3 accounts watched
+          - generic [ref=f1e523]:
+            - generic [ref=f1e524]:
+              - generic [ref=f1e525]: "01"
+              - generic [ref=f1e526]: T
+              - generic [ref=f1e527]:
+                - strong [ref=f1e528]: The Sunday Edit
+                - generic [ref=f1e529]: "@thesundayedit · 412K"
+                - emphasis [ref=f1e530]: “A tiny ritual I did not expect to keep”
+              - generic [ref=f1e531]:
+                - strong [ref=f1e532]: 8.6%
+                - generic [ref=f1e533]: eng. rate
+            - generic [ref=f1e534]:
+              - generic [ref=f1e535]: "02"
+              - generic [ref=f1e536]: O
+              - generic [ref=f1e537]:
+                - strong [ref=f1e538]: One Pan Table
+                - generic [ref=f1e539]: "@onepantable · 186K"
+                - emphasis [ref=f1e540]: “The dinner I make when I have no plan”
+              - generic [ref=f1e541]:
+                - strong [ref=f1e542]: 6.9%
+                - generic [ref=f1e543]: eng. rate
+            - generic [ref=f1e544]:
+              - generic [ref=f1e545]: "03"
+              - generic [ref=f1e546]: W
+              - generic [ref=f1e547]:
+                - strong [ref=f1e548]: Weekend Outside
+                - generic [ref=f1e549]: "@weekendoutside · 128K"
+                - emphasis [ref=f1e550]: “The half-day trail that resets everything”
+              - generic [ref=f1e551]:
+                - strong [ref=f1e552]: 6.2%
+                - generic [ref=f1e553]: eng. rate
+          - generic [ref=f1e554]:
+            - article [ref=f1e555]:
+              - generic [ref=f1e556]:
+                - generic [ref=f1e557]: Everyday Motion
+                - generic [ref=f1e558]: 低风险
+              - heading "周二晚上测试：下班后的车，才是真实的车" [level=3] [ref=f1e559]
+              - paragraph [ref=f1e560]: 可借鉴：先呈现用户在压力场景下的判断，再用一个功能细节兑现它。
+              - paragraph [ref=f1e561]: 不可照搬：不复制对标账号的固定人设、原句和“quiet luxury”标签。
+              - generic [ref=f1e562]:
+                - generic [ref=f1e563]:
+                  - text: 机制相似
+                  - generic [ref=f1e564]: 42%
+                - generic [ref=f1e565]:
+                  - text: 表达相似
+                  - generic [ref=f1e566]: 18%
+              - button "加入候选池" [ref=f1e567] [cursor=pointer]
+            - article [ref=f1e572]:
+              - generic [ref=f1e573]:
+                - generic [ref=f1e574]: Drive with Maya
+                - generic [ref=f1e575]: 高风险
+              - heading "安静就是新的豪华" [level=3] [ref=f1e576]
+              - paragraph [ref=f1e577]: 可借鉴：把抽象感受落到日常细节。
+              - paragraph [ref=f1e578]: 不可照搬：该表达与对标账号的人设和高频措辞高度重合。
+              - generic [ref=f1e579]:
+                - generic [ref=f1e580]:
+                  - text: 机制相似
+                  - generic [ref=f1e581]: 68%
+                - generic [ref=f1e582]:
+                  - text: 表达相似
+                  - generic [ref=f1e583]: 48%
+              - button "需人工改写" [disabled] [ref=f1e584]
+      - generic [ref=f1e587]:
+        - generic [ref=f1e588]:
+          - generic [ref=f1e589]:
+            - generic [ref=f1e590]: CANDIDATE POOL · SHARED OUTPUT
+            - heading "候选内容池" [level=2] [ref=f1e591]
+            - paragraph [ref=f1e592]: 热点与低风险对标策略汇合到同一候选池，完成分析和人工确认后再进入二创流程。
+          - generic [ref=f1e593]: 3 items
+        - generic [ref=f1e594]:
+          - generic [ref=f1e595]:
+            - generic [ref=f1e596]:
+              - strong [ref=f1e597]: 周二晚上测试：下班后的车，才是真实的车
+              - generic [ref=f1e598]: 对标策略 · Everyday Motion · 09:35
+            - generic [ref=f1e599]: 待分析
+            - generic [ref=f1e600]:
+              - button "进入拆解" [ref=f1e601] [cursor=pointer]
+              - button "忽略" [ref=f1e605] [cursor=pointer]
+          - generic [ref=f1e606]:
+            - generic [ref=f1e607]:
+              - strong [ref=f1e608]: Tiny car upgrades people actually save
+              - generic [ref=f1e609]: Local signal stream · 14:02
+            - generic [ref=f1e610]: 待分析
+            - generic [ref=f1e611]:
+              - button "进入拆解" [ref=f1e612] [cursor=pointer]
+              - button "忽略" [ref=f1e616] [cursor=pointer]
+          - generic [ref=f1e617]:
+            - generic [ref=f1e618]:
+              - strong [ref=f1e619]: Quiet luxury, but make it practical
+              - generic [ref=f1e620]: TikTok Creative Center · 14:01
+            - generic [ref=f1e621]: 待分析
+            - generic [ref=f1e622]:
+              - button "进入拆解" [ref=f1e623] [cursor=pointer]
+              - button "忽略" [ref=f1e627] [cursor=pointer]

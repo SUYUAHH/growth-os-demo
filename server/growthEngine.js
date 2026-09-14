@@ -24,6 +24,8 @@ export const intelligenceRules = [
   { id: 'series-ready', label: '适合系列化', description: '主题可重复、可拆成步骤或连续场景。', criterion: '内容带有系列化或可复刻信号' },
   { id: 'low-follower-breakout', label: '低粉爆款', description: '粉丝基数不高但内容互动效率突出。', criterion: '粉丝 ≤ 200K 且点赞率 ≥ 5.5%' },
   { id: 'high-follower-quality', label: '高粉高质量', description: '成熟账号仍保持稳定的互动质量。', criterion: '粉丝 ≥ 250K 且点赞率 ≥ 5.5%' },
+  { id: 'x-paid-decision', label: 'X 投流判断', description: '结合 X Ads 投放记录、曝光/粉丝比和互动结构判断，不把高曝光直接等同于投流。', criterion: '已投流：匹配 post_id 与 Campaign；疑似投流：曝光/粉丝异常或推广线索；自然增长倾向：互动结构与账号基线匹配' },
+  { id: 'topic-trend', label: '话题趋势关联', description: '识别热点、趋势、事件和搜索话题带来的外部放大。', criterion: '命中话题标签或趋势数据：有话题趋势；否则：未发现明显话题趋势' },
 ]
 
 const categoryByKey = new Map(contentCategories.map((item) => [item.key, item]))
@@ -243,7 +245,13 @@ export function normalizeGrowthState(state) {
   const accounts = (state.accounts || []).map(normalizedAccount)
   const rawTrends = state.trends || []
   const legacyTrends = rawTrends.some((trend) => /car|commute|luxury|vehicle|汽车|通勤|豪华|新能源/i.test(`${trend.title} ${trend.sourcePost || ''}`))
-  const trends = (legacyTrends ? seedTrends : rawTrends).map((trend, index) => withCategory(trend, index))
+  const trends = (legacyTrends ? seedTrends : rawTrends).map((trend, index) => {
+    const normalized = withCategory(trend, index)
+    // Keep the persisted demo snapshot aligned with the current X-only remix scenario.
+    if (normalized.id === 'quiet-luxury') return { ...normalized, source: 'X 公开样本快照', platform: 'X' }
+    if (normalized.id === 'first-car' || normalized.id === 'tiny-upgrade') return { ...normalized, source: 'X Trend Radar · Community', platform: 'X' }
+    return normalized
+  })
   const rawCandidates = state.candidatePool || []
   const legacyCandidates = rawCandidates.some((candidate) => /car|commute|luxury|vehicle|汽车|通勤|豪华|新能源/i.test(`${candidate.title} ${candidate.source || ''}`))
   const candidatePool = (legacyCandidates ? [] : rawCandidates).map((candidate, index) => {

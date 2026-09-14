@@ -11,11 +11,12 @@ export const account = {
 }
 
 export const navItems = [
-  { id: 'dashboard', label: '总仪表盘', description: '全局 · 账号 · 预警' },
-  { id: 'intelligence', label: '增长情报', description: '热点 · 复盘 · 对标' },
-  { id: 'remix', label: '爆款拆解', description: '结构 · 选题 · 二创' },
-  { id: 'distribution', label: '分发优化', description: '发布 · 健康 · 复盘' },
+  { id: 'dashboard', label: '经营总览', description: '今日决策 · 风险 · 任务' },
+  { id: 'intelligence', label: '增长机会', description: '机会 · 证据 · 动作' },
+  { id: 'remix', label: '内容决策', description: '拆解 · 复用 · 假设' },
+  { id: 'distribution', label: '执行与复盘', description: '任务 · 发布 · 复盘' },
   { id: 'assets', label: '内容资产', description: '审核 · 素材 · 待发布' },
+  { id: 'account-kol', label: '账号经营与风险', description: '账号 · 内容 · 风险' },
 ]
 
 export const trends = [
@@ -23,7 +24,8 @@ export const trends = [
     id: 'quiet-luxury',
     title: 'The tiny rituals that make a weekday feel better',
     chineseTitle: '让工作日变舒服的小仪式',
-    source: 'TikTok Creative Center',
+    source: 'X 公开样本快照',
+    platform: 'X',
     age: '3h ago',
     momentum: 92,
     relevance: 88,
@@ -50,7 +52,8 @@ export const trends = [
     id: 'first-car',
     title: 'The 15-minute dinner people keep making',
     chineseTitle: '大家反复做的 15 分钟晚餐',
-    source: 'Trend Radar · Community',
+    source: 'X Trend Radar · Community',
+    platform: 'X',
     age: '6h ago',
     momentum: 81,
     relevance: 94,
@@ -77,7 +80,8 @@ export const trends = [
     id: 'tiny-upgrade',
     title: 'The weekend trail that feels like a reset',
     chineseTitle: '让周末重新充满电的户外路线',
-    source: 'Instagram Reels',
+    source: 'X Trend Radar · Community',
+    platform: 'X',
     age: 'Yesterday',
     momentum: 74,
     relevance: 79,

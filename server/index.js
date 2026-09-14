@@ -71,6 +71,13 @@ async function handleApi(request, response, url) {
       return sendJson(response, 201, publicState(await updateState((current) => createCandidateFromCapturedPost(current, post))))
     } catch (error) { return sendJson(response, 400, { error: error.message }) }
   }
+  if (request.method === 'POST' && url.pathname === '/api/capture/import') {
+    try {
+      const { posts = [] } = await readBody(request)
+      const normalized = posts.map((post) => ({ ...post, sourceType: 'x-public-browser', sources: ['x-public-browser'], capturedAt: new Date().toISOString() }))
+      return sendJson(response, 201, publicState(await updateState((state) => saveCapturedPosts(state, normalized, { sourceType: 'x-public-browser', query: '公开首页样本' }))))
+    } catch (error) { return sendJson(response, 400, { error: error.message }) }
+  }
   if (request.method === 'GET' && url.pathname === '/api/agent/status') return sendJson(response, 200, agentStatus())
   if (request.method === 'GET' && url.pathname === '/api/growth/daily-report') {
     const state = await getState()
