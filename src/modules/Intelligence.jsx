@@ -13,6 +13,11 @@ import AccountIntelligenceBoard from '../components/AccountIntelligenceBoard'
 import AccountAudienceProfile from '../components/AccountAudienceProfile'
 import { evaluateCandidatePaidSignal, evaluateHotspotSignal } from '../lib/candidatePaidSignals.js'
 import { assessCandidate } from '../lib/candidateEvidence.js'
+import { xPublicSamplePosts } from '../data/xSampleData.js'
+
+function PublicSampleBoard() {
+  return <section className="section-block dashboard-surface public-sample-board"><SectionHeader eyebrow="X PUBLIC SAMPLE · DEMO" title="三条真实样本快照" detail="用于演示：从公开 X 内容进入候选池，再进行增长原因与复用判断。数据为样本快照，不代表实时接口。" action={<span className="queue-count">3 samples</span>} /><div className="public-sample-grid">{xPublicSamplePosts.map((post) => <article className="public-sample-card" key={post.id}><div><strong>{post.author.username}</strong><small>{post.publishedAt} · {post.author.followers.toLocaleString()} 粉丝</small></div><h3>{post.title}</h3><div className="candidate-pool-tags"><span className="micro-tag">曝光 {post.metrics.impressions.toLocaleString()}</span><span className="micro-tag">点赞 {post.metrics.likes.toLocaleString()}</span><span className="micro-tag">评论 {post.metrics.replies}</span><span className="micro-tag">转发 {post.metrics.reposts}</span></div><div className="tag-row">{post.labels.map(label => <span className="micro-tag category-tag" key={label}>{label}</span>)}</div><a className="text-button" href={post.sourceUrl} target="_blank" rel="noreferrer">查看公开来源 <ArrowUpRight size={13} /></a></article>)}</div></section>
+}
 
 const categoryFilters = [{ key: 'all', label: '全部热点' }, { key: 'lifestyle', label: '生活方式' }, { key: 'food', label: '美食餐饮' }, { key: 'travel', label: '旅行户外' }]
 
@@ -79,6 +84,7 @@ export default function Intelligence({ trends, selectedTrend, onSelectTrend, onO
     : [{ label: '整体评分', value: `${latestReport?.overallScore || Math.round(accountList.reduce((sum, item) => sum + item.health, 0) / accountList.length)}`, detail: '多账号综合' }, { label: '高优问题', value: `${accountList.flatMap(fallbackIssues).filter((issue) => issue.priority === 'P0').length}`.padStart(2, '0'), detail: '需要介入' }, { label: '待确认任务', value: `${openTasks.length}`.padStart(2, '0'), detail: '负责人跟进' }, { label: '已完成任务', value: `${leaderTasks.length - openTasks.length}`.padStart(2, '0'), detail: '等待日报验证' }]
 
   return <div className="page-content page-intelligence">
+    <PublicSampleBoard />
     <div className="page-hero">
       <div><div className="eyebrow"><Radar size={14} /> GROWTH INTELLIGENCE · TASKS 02 / 03 / 04 <span className="eyebrow-line" /></div><h1>把信号、诊断和策略，变成今天能执行的动作。</h1><p className="hero-copy">热点 Agent 发现机会，多账号复盘 Agent 定位问题，对标 Agent 生成差异化策略；三者共享来源和人工决策记录。</p></div>
       <div className="hero-actions"><button className="secondary-button" onClick={onRefresh} disabled={syncing}><RefreshCw size={15} className={syncing ? 'spin' : ''} />{syncing ? '监测中...' : '立即监测'}</button><button className="rules-trigger" onClick={() => setRulesOpen((open) => !open)}><BookOpen size={14} />规则库 {rulesOpen ? <PanelRightClose size={14} /> : <PanelRightOpen size={14} />}</button><span className="last-run">Data mode <strong>LIVE DEMO</strong></span></div>
